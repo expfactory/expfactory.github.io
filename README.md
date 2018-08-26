@@ -2,7 +2,8 @@
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.00521/status.svg)](https://doi.org/10.21105/joss.00521) reproducible container experiments
 
 This is the web base for the experiment factory, reproducible experiment containers. 
-For getting started with reproducible experiment containers, see our [main documentation](https://expfactory.github.io/expfactory)
+For getting started with reproducible experiment containers, see our [main documentation](https://expfactory.github.io/) 
+built at this repository.
 
 ## Citation
 If the Experiment Factory is useful to you, please cite [the paper](https://doi.org/10.21105/joss.00521) 
