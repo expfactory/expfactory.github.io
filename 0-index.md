@@ -35,7 +35,7 @@ If you want a more gentle introduction, start with reading some [background](pag
  - [Usage](pages/3-usage.md) of an experiment factory container.
  - [Integrations](pages/4-integrations.md) including automated experiment testing robots, generators, and third party tools.
 
-## Developers Guide
+## Developer Guide
 
  - [Contribute](pages/5-contribute.md) an experiment to the [library](https://www.github.com/expfactory/experiments) for others to use.
  - [Interactive Development](pages/6-develop.md) suggested practice to develop and debug an experiment interactively in the container
