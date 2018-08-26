@@ -23,6 +23,10 @@
     url: "/usage"
     slug: usage
 
+  - title: "Interactive Development"
+    url: "/development"
+    slug: development
+
   - title: "Contribute an Experiment"
     url: "/contribute"
     slug: contribute
