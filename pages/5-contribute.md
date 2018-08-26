@@ -6,6 +6,9 @@ permalink: /contribute
 ---
 
 # Contribute a Container
+This guide is intended for when you have a finished experiment and want to contribute it to the library. For
+steps on how to develop the experiment in the container environment itself, see our [developer's guide](/development)
+
 If you've finished your container and want to add it to the [recipes page](https://expfactory.github.io/experiments/recipes) for others to find and use, then you simply need to add an entry to the [containers file](https://github.com/expfactory/experiments/blob/master/docs/_data/containers.yml) to provide a name, link, and container base. You can do this via a pull request (meaning you would fork the repository, clone your fork, make changes, commit, and then file a pull request against the main repository) or simply [file an issue](https://github.com/expfactory/experiments/issues) with the following fields and the container will be added for you.
 
 ```

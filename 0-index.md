@@ -33,8 +33,12 @@ If you want a more gentle introduction, start with reading some [background](pag
  - [Generate](pages/1-generate.md) quick starts to generating containers.
  - [Customize](pages/2-customize.md) customize container and runtime variables, the database, and other settings.
  - [Usage](pages/3-usage.md) of an experiment factory container.
- - [Contribute](pages/4-contribute.md) an experiment to the [library](https://www.github.com/expfactory/experiments) for others to use.
- - [Integrations](pages/5-integrations.md) including automated experiment testing robots, generators, and third party tools.
+ - [Integrations](pages/4-integrations.md) including automated experiment testing robots, generators, and third party tools.
+
+## Developers Guide
+
+ - [Contribute](pages/5-contribute.md) an experiment to the [library](https://www.github.com/expfactory/experiments) for others to use.
+ - [Interactive Development](pages/6-develop.md) suggested practice to develop and debug an experiment interactively in the container
 
 ## Library
 
