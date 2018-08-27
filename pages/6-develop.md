@@ -67,7 +67,7 @@ Next we'll build the docker container, using the Dockerfile we just created.
 
 ```bash
 docker build -t expfactory/experiments .
-```bash
+```
 
 ### Clone task files to host directory
 
