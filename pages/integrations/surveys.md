@@ -9,7 +9,7 @@ permalink: /integration-surveys
 
 A survey is (for now) just an experiment that is primarily questions. Since this is a common need for 
 researchers, we have developed a simple means to turn a tab separated file into a web-ready experiment.
-We will be using the Experiment Factory survey generator (a [Docker container](https://hub.docker.com/r/vanessa/survey-generator/)) to convert a tab delimited file of questions (called `survey.tsv`) with a standard [experiment factory config.json](https://expfactory.github.io/expfactory/contribute#the-experiment-config) to generate a folder with web content to serve your experiment.
+We will be using the Experiment Factory survey generator (a [Docker container](https://hub.docker.com/r/expfactory/survey-generator/)) to convert a tab delimited file of questions (called `survey.tsv`) with a standard [experiment factory config.json](https://expfactory.github.io/expfactory/contribute#the-experiment-config) to generate a folder with web content to serve your experiment.
 
 ## Usage
 
@@ -58,7 +58,7 @@ echo "My Awesome Survey!" >> README.md
 The output is minimal, but when we finish, our survey is ready!
 
 ```
-$ docker run -v $PWD:/data vanessa/survey-generator start
+$ docker run -v $PWD:/data expfactory/survey-generator start
 Writing output files to /data/index.html
 index.html
 js
@@ -79,14 +79,14 @@ python3 -m http.server 9999
 If you need to generate the `index.html` again and force overwrite, use `--force`.
 
 ```
-docker run -v $PWD:/data vanessa/survey-generator start --force
+docker run -v $PWD:/data expfactory/survey-generator start --force
 ```
 
 ## Development
 If you want to build the image:
 
 ```
-docker build -t vanessa/survey-generator .
+docker build -t expfactory/survey-generator .
 ```
 
 <div>
