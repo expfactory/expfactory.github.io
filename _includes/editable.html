@@ -46,13 +46,13 @@ $(document).ready(function() {
         var button = "<p><a href='" + link + "' target='_blank'>Permalink</a></p>";
         start += button;
 
-        // Edit (assuming deployed under docs, remove docs if on master)
-        var link = "{{ site.github }}/edit/master/docs/{{ page.path }}#" + did;
+        // Edit (assuming deployed under main organization repo)
+        var link = "{{ site.repo }}/edit/master/{{ page.path }}#" + did;
         var button = "<p><a href='" + link + "' target='_blank'>Edit this page</a></p>";
         start += button;
 
         // Issues;
-        var link = "{{ site.github }}/issues/new?labels={% if page.editable %}{{ page.editable }}{% else %}question{% endif %}&title=Question:&body=Question on: {{ site.github }}/tree/master/docs/{{ page.path }}%23" + did;
+        var link = "{{ site.repo }}/issues/new?labels={% if page.editable %}{{ page.editable }}{% else %}question{% endif %}&title=Question:&body=Question on: {{ site.repo }}/tree/master/{{ page.path }}%23" + did;
 
         var button = "<p><a href='" + link + "' target='_blank'>Ask a Question</a></p>";
         start += button;

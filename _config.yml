@@ -2,7 +2,7 @@
 title:        The Experiment Factory
 tagline:      ""
 baseurl:      "/"
-github:       "https://www.github.com/expfactory/expfactory"
+repo:       "https://www.github.com/expfactory/expfactory"
 
 # About/contact
 author:
