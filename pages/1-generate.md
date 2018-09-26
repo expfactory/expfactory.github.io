@@ -347,7 +347,7 @@ For this first go, we aren't going to map the data folder. This way I can show y
 **Without SSL**
 
 Remember, the above is *without* SSL (https)! If you want to deploy an https container,
-see [these docs](/expfactory/generate-https).
+see [these docs](/generate-https).
 
 ```
 docker run -p 80:80 expfactory/experiments start
