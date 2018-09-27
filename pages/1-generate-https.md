@@ -231,7 +231,7 @@ Certificates expire after 90 days. You'll get reminders at 20 days, 10 days, and
 ```bash
 sudo certbot renew
 ```
-Before renewing you need to stop the docker container running expfactory and start nginx outside of docker.
+***Before renewing you need to stop the docker container running expfactory and start nginx outside of docker.***
 
 
 Importantly, when you start the container (that will be generated in the next steps)
