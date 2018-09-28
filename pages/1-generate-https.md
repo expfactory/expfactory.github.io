@@ -247,7 +247,7 @@ sudo certbot renew
 sudo service nginx stop
 ```
 
-And then issue the command you used to start your container.
+And then issue the command to start your container.
 
 Importantly, when you start the container (that will be generated in the next steps)
 you will need to bind to these files on the host, and
