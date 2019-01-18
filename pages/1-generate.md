@@ -63,7 +63,7 @@ The generation of a container comes down to adding the experiments to a text fil
  - generating a recipe with (reproducible) steps to build a custom container
  - building the container!
 
-Note that if you want to deploy a container with https, you should read our [https generation](/expfactory/generate-https) page, and then come back here to read about [interaction with your container](/expfactory/generate#shell-into-your-container).
+Note that if you want to deploy a container with https, you should read our [https generation](/generate-https) page, and then come back here to read about [interaction with your container](/expfactory/generate#shell-into-your-container).
 
 
 ## The Expfactory Builder Image
