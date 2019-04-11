@@ -219,8 +219,8 @@ For expfactory, you would want the same task associated with a different experim
 and separate blocks in the battery of experiments. For example, suppose:
 
  - you want to measure the effect of two different task variations or blocks of the [Attention Network Test (ANT)](https://github.com/expfactory-experiments/attention-network-task).
- - you can assign participants to each task using [participant variables](https://expfactory.github.io/expfactory/usage#participant-variables).
-  
+ - you can assign participants to each task using [participant variables](https://expfactory.github.io/usage#participant-variables).
+ 
 Thus, you would want a container that runs a baseline ANT, possibly other tasks, and then runs the ANT for a second time.  Because each task requires a unique name, you can use local experiments to build a container that runs the ANT twice.
 
 Generate your Dockerfile with the tasks that you want to run between the two ANT measurements.  
