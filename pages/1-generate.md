@@ -30,13 +30,13 @@ cd /tmp/my-experiment
 What experiments do you want in your container? Let's see the ones that are available!
 
 ```
-docker run vanessa/expfactory-builder list
+docker run quay.io/vanessa/expfactory-builder list
 ```
 
 Cool, I like `digit-span`, `spatial-span`, `test-task`, and `tower-of-london`.
 
 ```
-docker run -v $PWD:/data vanessa/expfactory-builder build digit-span spatial-span tower-of-london test-task 
+docker run -v $PWD:/data quay.io/vanessa/expfactory-builder build digit-span spatial-span tower-of-london test-task 
 ```
 
 Let's build the container from the Dockerfile! We are going to name it `expfactory/experiments`
@@ -68,20 +68,20 @@ Note that if you want to deploy a container with https, you should read our [htt
 
 ## The Expfactory Builder Image
 Both of these steps start with the expfactory builder container. 
-We've [provided an image](https://hub.docker.com/r/vanessa/expfactory-builder) that will generate a Dockerfile,
-and from it you can build your Docker image.  We don't build the image within the same 
+We've [provided an image](https://hub.docker.com/r/quay.io/vanessa/expfactory-builder) that will generate a Dockerfile, and from it you can build your Docker image.  
+Note that bases for expfactory were initially provided on [Docker Hub](https://hub.docker.com/r/vanessa/expfactory-builder/tags) and have moved to [Quay.io](https://quay.io/repository/vanessa/expfactory-builder?tab=tags). Dockerfiles in the repository that use the expfactory-builder are also updated. If you need a previous version, please see the tags on the original Docker Hub. We don't build the image within the same 
 container for the explicit purpose that you should keep a copy of the recipe
 Dockerfile at hand. The basic usage is to run the image, and you can either build, test, or list.
 
 ```
-$ docker run vanessa/expfactory-builder
+$ docker run quay.io/vanessa/expfactory-builder
 
 Usage:
 
-          docker run vanessa/expfactory-builder list
-          docker run vanessa/expfactory-builder build experiment-one experiment-two ...
-          docker run -v experiments:/scif/apps vanessa/expfactory-builder test
-          docker run -v $PWD/_library:/scif/apps vanessa/expfactory-builder test-library
+          docker run quay.io/vanessa/expfactory-builder list
+          docker run quay.io/vanessa/expfactory-builder build experiment-one experiment-two ...
+          docker run -v experiments:/scif/apps quay.io/vanessa/expfactory-builder test
+          docker run -v $PWD/_library:/scif/apps quay.io/vanessa/expfactory-builder test-library
 ```
 
 We will discuss each of these commands in more detail.
@@ -94,7 +94,7 @@ We also have some pre-generated commands in our [recipes portal](/experiments/re
 Here is how to list all the experiments in the library:
 
 ```
-docker run vanessa/expfactory-builder list
+docker run quay.io/vanessa/expfactory-builder list
 
 Expfactory Version: 3.0
 Experiments
@@ -110,7 +110,7 @@ Experiments
 Try using grep if you want to search for a term in the name or url
 
 ```
-docker run vanessa/expfactory-builder list | grep survey
+docker run quay.io/vanessa/expfactory-builder list | grep survey
 2  alcohol-drugs-survey	https://www.github.com/expfactory-experiments/alcohol-drugs-survey
 4  dospert-eb-survey	https://www.github.com/expfactory-experiments/dospert-eb-survey
 5  dospert-rp-survey	https://www.github.com/expfactory-experiments/dospert-rp-survey
@@ -135,7 +135,7 @@ should not already contain a Dockerfile, and we recommend that you set this fold
 ```
 mkdir -p /tmp/my-experiment/data
 docker run -v /tmp/my-experiment:/data \
-              vanessa/expfactory-builder \
+              quay.io/vanessa/expfactory-builder \
               build tower-of-london
 
 Expfactory Version: 3.0
@@ -157,7 +157,7 @@ I would then mount the present working directory (`experiments`) to `/data` in t
 
 ```
 docker run -v $PWD:/data \
-              vanessa/expfactory-builder \
+              quay.io/vanessa/expfactory-builder \
               build test-task \
                     /data/test-task-two
 
@@ -202,7 +202,7 @@ The library install (top) clones from Github, and the local install adds the ent
 
 ```
 docker run -v /tmp/another_base:/data \
-              vanessa/expfactory-builder \
+              quay.io/vanessa/expfactory-builder \
               build test-task /data/test-task-two
 ```
 
@@ -453,7 +453,7 @@ You can also use the name.
 
 
 ## Adding Experiments
-While we encourage you to re-generate the file with the `vanessa/expfactory-builder` so generation of your
+While we encourage you to re-generate the file with the `quay.io/vanessa/expfactory-builder` so generation of your
 container is reproducible, it's possible to install experiments into your container after it's generated. You
 should only do this for development, as changes that you make to your container that are not recorded in the Dockerfile
 are not reproducible. Let's say that we have an experiment container that has one task, `tower-of-london`, and we want to install
@@ -525,7 +525,7 @@ docker restart 9e256e1b1473
 You then should have the new experiment installed in the container! Remember, you would want to go back and (properly) produce this:
 
 ```
-docker run -v $PWD:/data vanessa/expfactory-builder build digit-span test-task 
+docker run -v $PWD:/data quay.io/vanessa/expfactory-builder build digit-span test-task 
 ```
 
 If you have any questions about the above, or want more detail, please [get in touch](https://www.github.com/expfactory/issues) as I am looking to develop this.

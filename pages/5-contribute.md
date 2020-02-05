@@ -155,7 +155,8 @@ we just talked about above. This test is appropriate if you've prepared an exper
  - a **contribution** is a submission of one or more experiments to the [library](https://www.github.com/expfactory/experiments),  meaning one or more markdown file intended to be added to the `_library` folder. The contribution tests also test the experiments, but retrieves them from your repository on Github. Thus, this test is useful when you've pushed your experiment to Github, and want to (locally) test if it's ready for the library.
  - an **install** means that you've finished your experiment, and want to see it running in the experiments container.
 
-For the cases above, you can use the `vanessa/expfactory-builder` image to run tests. It assumes mounting either a directory with one or more experiment subfolders
+For the cases above, you can use the `quay.io/vanessa/expfactory-builder` image to run tests. It assumes mounting either a directory with one or more experiment subfolders. 
+Note that bases for expfactory were initially provided on [Docker Hub](https://hub.docker.com/r/vanessa/expfactory-builder/tags) and have moved to [Quay.io](https://quay.io/repository/vanessa/expfactory-builder?tab=tags). Dockerfiles in the repository that use the expfactory-builder are also updated. If you need a previous version, please see the tags on the original Docker Hub.
 
 
 ### Test an Experiment
@@ -165,7 +166,7 @@ Testing an experiment primarily means two things: some kind of static testing fo
 When you submit an experiment for review, given that the repository for the experiment is also hosting it on the Github pages associated with the repository, it's likely easy enough for you and your reviewers to test the experiment using Github pages. However, for predictable experiment layouts (e.g., jspsych) we have developed a set of [Experiment Robots](/integrations.html#expfactory-robots) that you can use for hands off interactive testing.
 
 ### Static Testing
-You have two options to test experiments on your host using `vanessa/expfactory-builder`. If you want to test a single experiment, meaning a folder with a `config.json` file:
+You have two options to test experiments on your host using `quay.io/vanessa/expfactory-builder`. If you want to test a single experiment, meaning a folder with a `config.json` file:
 
 ```
 my-experiment/
@@ -175,7 +176,7 @@ my-experiment/
 then you should bind directory to it like this:
 
 ```
-docker run -v my-experiment:/scif/apps vanessa/expfactory-builder test
+docker run -v my-experiment:/scif/apps quay.io/vanessa/expfactory-builder test
 Testing experiments mounted to /scif/apps
 ....Test: Experiment Validation
 
@@ -201,7 +202,7 @@ experiments/
 then you can bind the the main top level folder like this:
 
 ```
-docker run -v experiments:/scif/apps vanessa/expfactory-builder test
+docker run -v experiments:/scif/apps quay.io/vanessa/expfactory-builder test
 Testing experiments mounted to /scif/apps
 .
 ----------------------------------------------------------------------
@@ -234,7 +235,7 @@ This set of tests is more stringent in that the test starts with one of more sub
 You need to bind the folder with markdown files for the library to `/scif/data` this time around. These tests have a lot more output because they are more substantial:
 
 ```
-docker run -v $PWD/_library:/scif/data vanessa/expfactory-builder test-library
+docker run -v $PWD/_library:/scif/data quay.io/vanessa/expfactory-builder test-library
 ```
 
 
@@ -243,7 +244,7 @@ Testing an installation is likely the most important, and final step. We mimic t
 
 ```
 mydir -p /tmp/recipe
-docker run -v /tmp/recipe:/data vanessa/expfactory-builder build test-task
+docker run -v /tmp/recipe:/data quay.io/vanessa/expfactory-builder build test-task
 ```
 
 then build your container

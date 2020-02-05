@@ -255,15 +255,16 @@ expose ports 80 and 443 too. Now it's time to generate our container!
 
 
 ## The Expfactory Builder Image
-The provided [expfactory builder image](https://hub.docker.com/r/vanessa/expfactory-builder) will generate your Dockerfile, and from this file you can build your Docker image.  Versons (tags) 3.12 and up (including latest) have support for https. We don't build the image within the same container for the explicit purpose that you should keep a copy of the recipe Dockerfile at hand. The basic usage is to run the image, and you can either build, test, or list.
+The provided [expfactory builder image](https://hub.docker.com/r/quay.io/vanessa/expfactory-builder) will generate your Dockerfile, and from this file you can build your Docker image.  Versons (tags) 3.12 and up (including latest) have support for https. We don't build the image within the same container for the explicit purpose that you should keep a copy of the recipe Dockerfile at hand. The basic usage is to run the image, and you can either build, test, or list.
 
 ```bash
-$ docker run vanessa/expfactory-builder [list|build|test|test-library]
+$ docker run quay.io/vanessa/expfactory-builder [list|build|test|test-library]
 ```
 
 Generally, list will show you experiments provided by expfactory, build is used to generate your custom Dockerfile, and test is used for testing (derp). We will only be covering
 enough detail here to build container with https. If you want more detail about installation of local experiments or other customization of the Dockerfile, you should refer to the main [generate page](/generate). You might also look at how to [customize your container runtime](/generate#customize-your-container).
 
+Note that bases for expfactory were initially provided on [Docker Hub](https://hub.docker.com/r/vanessa/expfactory-builder/tags) and have moved to [Quay.io](https://quay.io/repository/vanessa/expfactory-builder?tab=tags). Dockerfiles in the repository that use the expfactory-builder are also updated. If you need a previous version, please see the tags on the original Docker Hub.
 
 ## Recipe Generation
 To generate a Dockerfile to build our custom image, we need to run expfactory in the container,
@@ -274,7 +275,7 @@ mkdir -p $HOME/my-experiment/data
 
 # notice we specify a different Dockerfile input that has https
 docker run -v $HOME/my-experiment:/data \
-              vanessa/expfactory-builder \
+              quay.io/vanessa/expfactory-builder \
               build tower-of-london \
               --input build/docker/Dockerfile.https
 ```
