@@ -19,14 +19,14 @@ If you leave these defaults, you (and the future users of your container) can th
 The choice is up to you! For settings defaults at build time, see the next section [default variables](#default-variables). For setting at runtime, see the next page for [starting your container](/usage.html#start-the-container).
  
 ## Default Variables
-When you run a build with `vanessa/expfactory-builder` image, there are other command line options available pertaining to the database and study id. Try running `docker run vanessa/expfactory-builder build --help` to see usage. If you customize these variables, the container recipe generated will follow suit.
+When you run a build with `quay.io/vanessa/expfactory-builder` image, there are other command line options available pertaining to the database and study id. Try running `docker run quay.io/vanessa/expfactory-builder build --help` to see usage. If you customize these variables, the container recipe generated will follow suit.
 
 ### database
 We recommend that you generate your container using the default "filesystem" database, and customize the database at runtime. A **filesystem** database is flat files, meaning that results are written to a mapped folder on the local machine, and each participant has their own results folder. This option is provided as many labs are accustomed to providing a battery locally, and want to save output directly to the filesystem without having any expertise with setting up a database. This argument doesn't need to be specified, and would coincide with:
 
 ```
 docker run -v /tmp/my-experiment:/data \
-              vanessa/expfactory-builder \
+              quay.io/vanessa/expfactory-builder \
               build --database filesystem \
                       tower-of-london
 ```
@@ -58,7 +58,7 @@ To ask for a different study id:
 
 ```
 docker run -v /tmp/my-experiment:/data \
-              vanessa/expfactory-builder \
+              quay.io/vanessa/expfactory-builder \
               build --studyid dns \
                       tower-of-london
 ```
@@ -101,6 +101,8 @@ The next set are relevant for installation.
 | EXPFACTORY_LOGS | /scif/logs | NA | folder to store `expfactory.log` in |
 | EXPFACTORY_COLORIZE | true | NA | print colored debugging to the screen |
 | EXPFACTORY_SERVER | localhost | NA | the server address, usually localhost is appropriate |
+
+Note that bases for expfactory were initially provided on [Docker Hub](https://hub.docker.com/r/vanessa/expfactory-builder/tags) and have moved to [Quay.io](https://quay.io/repository/vanessa/expfactory-builder?tab=tags). Dockerfiles in the repository that use the expfactory-builder are also updated. If you need a previous version, please see the tags on the original Docker Hub.
 
 ## Expfactory wants Your Feedback!
 The customization process is very important, because it will mean allowing you to select variable stimuli, lengths, or anything to make a likely general experiment specific to your use case. To help with this, please [let us know](https://www.github.com/expfactory/expfactory/issues) your thoughts.
