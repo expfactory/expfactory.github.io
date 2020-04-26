@@ -9,7 +9,7 @@ The Experiment Factory, by way of its modular containers, has many good friends!
 look below at the different options you have for integrations.
 
  - [Surveys](/integration-surveys) A survey integration is a simple plugin that uses Google Material Design Lite to administer form based surveys. Here we have prepared an automated builder to help you generate a survey folder.
- - [Robots](/eintegration-robots): The Experiment factory robots are a set of scripts (and associated containers) that provide an automated means to run through experiments or surveys.
+ - [Robots](/integration-robots): The Experiment factory robots are a set of scripts (and associated containers) that provide an automated means to run through experiments or surveys.
  - [LabJS](/integration-labjs) LabJS is a beautifully done web interface for interactive experiment generation, and you can now export your experiments directly into folders ready for the Experiment Factory!
 
 

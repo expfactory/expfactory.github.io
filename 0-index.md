@@ -81,5 +81,5 @@ We are here for you! You can ask a question directly or open an issue for:
 If your issue is for a particular experiment, open the issue at the respective repository for the [expfactory-experiments](https://www.github.com/expfactory-experiments) organization.
 
 <div>
-    <a href="/expfactory/generate"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
+    <a href="/generate"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
 </div><br>
