@@ -24,7 +24,7 @@ This general workflow using the experiment factory builder means that you could 
  - run your experiment container across computers with Docker without worrying about dependencies
  - share you experiments container with a colleague that can reproduce the battery
  - go back and use the same version of the builder to re-create your experiment container, or a slight derivation of it
- - (developers) contribute to the core expfactory Python software to enhance the builder, or [another integration or tool](/expfactory/integrations).
+ - (developers) contribute to the core expfactory Python software to enhance the builder, or [another integration or tool](/integrations).
 
 If you have not heard of Docker we recommend that you [read about it first](https://www.docker.com/what-container) and go through a [getting started](https://docs.docker.com/get-started/) tutorial. When you are ready, come back here and try out the quick start. If you have any questions, [please don't hesitate to ask](https://www.github.com/expfactory/expfactory/issues).
 

@@ -6,7 +6,7 @@ permalink: /usage
 ---
 
 # Usage
-If you've just finished [generating your experiments container](/generate.html) (whether a custom build or pull of an already existing container) then you are ready to use it! These sections will discuss runtime variables, along with settings like experiment order and database type.
+If you've just finished [generating your experiments container](/generate) (whether a custom build or pull of an already existing container) then you are ready to use it! These sections will discuss runtime variables, along with settings like experiment order and database type.
 
 {% include toc.html %}
 
@@ -856,6 +856,6 @@ To best develop the software for different deployment, it's important to discuss
 
 <br>
 <div>
-    <a href="/generate.html"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>
-    <a href="/contribute.html"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
+    <a href="/generate"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>
+    <a href="/contribute"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
 </div><br>

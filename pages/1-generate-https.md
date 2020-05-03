@@ -371,7 +371,7 @@ CONTAINER ID        IMAGE                COMMAND                  CREATED       
 2c503ddf6a7a        vanessa/experiment   "/bin/bash /starts..."   10 minutes ago      Up 10 minutes       0.0.0.0:80->80/tcp, 5000/tcp   zealous_raman
 ```
 
-You can also use the name (in this example `zealous_raman`) to reference the container, or give it your own name with `--name` when you run it. For more details on how to customize your container, including the database and study id, see the [usage](/expfactory/usage.html) docs.
+You can also use the name (in this example `zealous_raman`) to reference the container, or give it your own name with `--name` when you run it. For more details on how to customize your container, including the database and study id, see the [usage](/usage) docs.
 Finally, you will likely want to bind the data location in the container to your host, so that
 if the container stops and goes away, the data persists.
 

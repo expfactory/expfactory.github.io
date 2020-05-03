@@ -63,7 +63,7 @@ The generation of a container comes down to adding the experiments to a text fil
  - generating a recipe with (reproducible) steps to build a custom container
  - building the container!
 
-Note that if you want to deploy a container with https, you should read our [https generation](/generate-https) page, and then come back here to read about [interaction with your container](/expfactory/generate#shell-into-your-container).
+Note that if you want to deploy a container with https, you should read our [https generation](/generate-https) page, and then come back here to read about [interaction with your container](/generate#shell-into-your-container).
 
 
 ## The Expfactory Builder Image
@@ -118,7 +118,7 @@ docker run quay.io/vanessa/expfactory-builder list | grep survey
 ```
 
 ## Local Experiment Selection
-If you have experiments on your local machine where an experiment is defined based on [these criteria](https://expfactory.github.io/expfactory/contribute.html#experiment-pre-reqs) or more briefly:
+If you have experiments on your local machine where an experiment is defined based on [these criteria](/contribute#experiment-pre-reqs) or more briefly:
 
  - the config.json has all required fields
  - the folder is named according to the `exp_id`
@@ -389,7 +389,7 @@ CONTAINER ID        IMAGE                COMMAND                  CREATED       
 2c503ddf6a7a        vanessa/experiment   "/bin/bash /starts..."   10 minutes ago      Up 10 minutes       0.0.0.0:80->80/tcp, 5000/tcp   zealous_raman
 ```
 
-You can also use the name (in this example `zealous_raman`) to reference the container, or give it your own name with `--name` when you run it. For more details on how to customize your container, including the database and study id, see the [usage](/expfactory/usage.html) docs.
+You can also use the name (in this example `zealous_raman`) to reference the container, or give it your own name with `--name` when you run it. For more details on how to customize your container, including the database and study id, see the [usage](/usage) docs.
 
 
 ## Shell into your Container
@@ -531,9 +531,9 @@ docker run -v $PWD:/data quay.io/vanessa/expfactory-builder build digit-span tes
 If you have any questions about the above, or want more detail, please [get in touch](https://www.github.com/expfactory/issues) as I am looking to develop this.
 
 
-Now that you are comfortable generating your container, check out how to [customize it](/expfactory/customize).
+Now that you are comfortable generating your container, check out how to [customize it](/customize).
 
 <div>
-    <a href="/expfactory/background"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>
-    <a href="/expfactory/customize"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
+    <a href="/background"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>
+    <a href="/customize"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
 </div><br>
