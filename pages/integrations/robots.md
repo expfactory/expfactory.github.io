@@ -90,6 +90,6 @@ LOG [done] stopping web server...
 ```
 
 <div>
-    <a href="/expfactory/integration-surveys"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>
-    <a href="/expfactory/integration-labjs"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
+    <a href="/integration-surveys"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>
+    <a href="/integration-labjs"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
 </div><br>

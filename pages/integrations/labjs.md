@@ -92,7 +92,7 @@ we don't need to do any building or use of Docker locally. We just need to:
 Once you've done those steps, that's it! The container will be built and pushed to Docker Hub on each commit.
 
 ## 3. Run
-Once your container is deployed, you can run and use it! [There are many ways to do that](https://expfactory.github.io/expfactory/usage). Here is a simple headless start:
+Once your container is deployed, you can run and use it! [There are many ways to do that](/usage). Here is a simple headless start:
 
 ```
 docker run -d -p 80:80 vanessa/expfactory-stroop start
@@ -103,6 +103,6 @@ and you will see the familiar interface to choose your task and get started. Hav
 ![https://github.com/expfactory/builder-labjs/raw/master/img/stroop.png](https://github.com/expfactory/builder-labjs/raw/master/img/stroop.png)
 
 <div>
-    <a href="/expfactory/integration-robots"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>
-    <a href="/expfactory/integrations"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
+    <a href="/integration-robots"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>
+    <a href="/integrations"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
 </div><br>

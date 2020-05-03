@@ -82,7 +82,7 @@ cd $TASK
 
 You could imagine here that instead of cloning the repository with the task, you might
 have your own local folder you are using instead. We still recommend you put it under version
-control, and then perhaps <a href="/contribute.html">contribute it </a> to the library!
+control, and then perhaps <a href="/contribute">contribute it </a> to the library!
 
 
 ### Run container
@@ -106,9 +106,9 @@ Now it should be up and running. By default, expfactory runs over port 80, so yo
 
 Because of the configuration we've used in these recipes, the task files are served out of `/home/$TASK` on the host-side. This makes it really easy to work with during the development process. The file that you probably want to start hacking away at is `/home/$TASK/experiment.js`, and the data will be stored in `$HOME/expfactory/$TASK/data`. After you've modified the task, you can reload the site in your browser to see the changes live. 
 
-When you finally complete your task, you should make it official by <a href="/contribute.html">contributing it </a> to the library! Happy coding!
+When you finally complete your task, you should make it official by <a href="/contribute">contributing it </a> to the library! Happy coding!
 
 <div>
-    <a href="/contribute.html"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>
-    <a href="/integrations.html"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
+    <a href="/contribute"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>
+    <a href="/integrations"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
 </div><br>
