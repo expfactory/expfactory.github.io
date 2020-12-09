@@ -68,7 +68,7 @@ Note that if you want to deploy a container with https, you should read our [htt
 
 ## The Expfactory Builder Image
 Both of these steps start with the expfactory builder container. 
-We've [provided an image](https://hub.docker.com/r/quay.io/vanessa/expfactory-builder) that will generate a Dockerfile, and from it you can build your Docker image.  
+We've [provided an image](https://quay.io/repository/vanessa/expfactory-builder?tab=tags) that will generate a Dockerfile, and from it you can build your Docker image.  
 Note that bases for expfactory were initially provided on [Docker Hub](https://hub.docker.com/r/vanessa/expfactory-builder/tags) and have moved to [Quay.io](https://quay.io/repository/vanessa/expfactory-builder?tab=tags). Dockerfiles in the repository that use the expfactory-builder are also updated. If you need a previous version, please see the tags on the original Docker Hub. We don't build the image within the same 
 container for the explicit purpose that you should keep a copy of the recipe
 Dockerfile at hand. The basic usage is to run the image, and you can either build, test, or list.
