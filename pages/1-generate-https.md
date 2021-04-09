@@ -389,3 +389,20 @@ Now that your container is running, you can refer to the [previous page](/genera
     <a href="/generate"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>
     <a href="/customize"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
 </div><br>
+
+**One droplet, multiple containers**
+
+To take things one step further, you might want to simultaneously run multiple studies (SSL containers) on the same droplet. This saves you the effort and cost of having one container per droplet. You can do this by mapping additional containers to ports other than the standard 80 (HTTP) and 443 (HTTPS) on the droplet.  To try this out, build a container containing `test-task`.
+
+```
+docker run -v $PWD:/data vanessa/expfactory-builder build test-task --input build/docker/Dockerfile.https
+docker build --no-cache -t expfactory/experiments .
+ ```
+ 
+Run this container as follows:
+ 
+```
+$ docker run -p 8000:80 -p 4443:443 -v /etc/ssl/certs:/etc/ssl/certs:ro -v /etc/ssl/private:/etc/ssl/private:ro -v /tmp/test-experiment/data:/scif/data expfactory/experiments start
+```
+
+You can then access this droplet at `https://your.domain:4443/`.
