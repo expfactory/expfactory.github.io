@@ -105,7 +105,7 @@ The next set are relevant for installation.
 Note that bases for expfactory were initially provided on [Docker Hub](https://hub.docker.com/r/vanessa/expfactory-builder/tags) and have moved to [Quay.io](https://quay.io/repository/vanessa/expfactory-builder?tab=tags). Dockerfiles in the repository that use the expfactory-builder are also updated. If you need a previous version, please see the tags on the original Docker Hub.
 
 ## Expfactory wants Your Feedback!
-The customization process is very important, because it will mean allowing you to select variable stimuli, lengths, or anything to make a likely general experiment specific to your use case. To help with this, please [let us know](https://www.github.com/expfactory/expfactory/issues) your thoughts.
+The customization process is very important, because it will mean allowing you to select variable stimuli, lengths, or anything to make a likely general experiment specific to your use case. To help with this, please [let us know](https://github.com/expfactory/expfactory/issues) your thoughts.
 
 <div>
     <a href="/generate"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>

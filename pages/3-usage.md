@@ -163,9 +163,8 @@ and export the environment variable in the container to the file. Make sure to o
 
 For a complete tutorial of the above, see the [test-parse-url repository](https://github.com/expfactory-experiments/test-parse-url/tree/master/docker).
 
-
-
 ## Start a Headless Experiment Container
+
 "Headless" refers to the idea that you going to be running your experiment with remote participants, and you will need to send them to a different portal that has them login first. In order to do this, you need to start the container with the `--headless` flag, and then issue a command to pre-generate these users.
 
 First we can start the container (notice that we are giving it a name to easily reference it by) with `--headless` mode.
@@ -189,10 +188,10 @@ docker run -p 80:80 -d --name experiments -v /tmp/data:/scif/data <container> \
                     --experiments test-task,tower-of-london start
 ```
 
-If you ask for non random order without giving a list, you will present the experiments in the order listed on the filesystem. See [pre-set-experiments](#pre-set-experiments) for more information.
-
+If you ask for non random order without giving a list, you will present the experiments in the order listed on the filesystem. See [pre-set-experiments](#pre-set-experiments) for more information. 
 
 ### Generate tokens
+
 A "token" is basically a subject id that is intended to be used once, and can be sent securely to your participants to access the experiments. The token can be refreshed, revoked, or active. You will need to generate them, and briefly it looks like this:
 
 
@@ -219,9 +218,18 @@ And of course it follows that if you enter a bad token, you cannot enter.
 </div>
 
 Once entry is given, the user can continue normally to complete the experiments in the protocol. 
+If you want to provide the pre-generated URL to your participants to skip the login, you can have them navigate to this url
+
+```
+https://<your-server>/login?token=<token>
+https://<your-server>/login?token=a34d4512-1841-4219-873d-2b9d1727a37a
+```
+
+**Important** since this is sending data with a GET request, this is not recommended to do without https.
 
 
 ### Headless Finish
+
 When the user finishes the protocol, the user will have the token revoked so an additional attempt to do the experiments will not work. You would need to generate a new session with token (the `--new` command above) or restart the participant to rewrite the previously generated data.
 
 
@@ -851,7 +859,7 @@ A few questions for you!
 
  - Would password protection of the portal be desired?
 
-To best develop the software for different deployment, it's important to discuss these issues. Please [post an issue](https://www.github.com/expfactory/expfactory/issues) to give feedback.
+To best develop the software for different deployment, it's important to discuss these issues. Please [post an issue](https://github.com/expfactory/expfactory/issues) to give feedback.
 
 
 <br>

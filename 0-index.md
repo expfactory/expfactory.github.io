@@ -25,7 +25,7 @@ docker run -p 80:80 vanessa/expfactory-surveys start
 docker run -p 80:80 vanessa/expfactory-experiments start
 ```
 
-If you want a more gentle introduction, start with reading some [background](pages/0-background.md) on containers and why the Experiment Factory exists in the first place. Then move on to our quick start to [generate](https://expfactory.github.io/generate#quick-start) your own experiment container. Please [give feedback](https://www.github.com/expfactory/expfactory/issues) about your needs to further develop the software. The [library](https://expfactory.github.io/experiments/) will show you a selection to choose from, including all experiments, surveys, and games migrated from [the legacy Expfactory](https://www.github.com/expfactory/expfactory-experiments). If you have web-based experiments to contribute, please [reach out](https://www.github.com/expfactory/expfactory/issues)! Your contributions and feedback are greatly appreciated!
+If you want a more gentle introduction, start with reading some [background](pages/0-background.md) on containers and why the Experiment Factory exists in the first place. Then move on to our quick start to [generate](https://expfactory.github.io/generate#quick-start) your own experiment container. Please [give feedback](https://github.com/expfactory/expfactory/issues) about your needs to further develop the software. The [library](https://expfactory.github.io/experiments/) will show you a selection to choose from, including all experiments, surveys, and games migrated from [the legacy Expfactory](https://github.com/expfactory/expfactory-experiments). If you have web-based experiments to contribute, please [reach out](https://github.com/expfactory/expfactory/issues)! Your contributions and feedback are greatly appreciated!
 
 ## User Guide
 
@@ -37,7 +37,7 @@ If you want a more gentle introduction, start with reading some [background](pag
 
 ## Developer Guide
 
- - [Contribute](pages/5-contribute.md) an experiment to the [library](https://www.github.com/expfactory/experiments) for others to use.
+ - [Contribute](pages/5-contribute.md) an experiment to the [library](https://github.com/expfactory/experiments) for others to use.
  - [Interactive Development](pages/6-develop.md) suggested practice to develop and debug an experiment interactively in the container
 
 ## Library
@@ -72,13 +72,13 @@ You'll notice a little eliipsis (<i class="fa fa-ellipsis-h"></i>) next to each 
 
 We are here for you! You can ask a question directly or open an issue for:
 
- - [Experiment Factory Core](https://www.github.com/expfactory/expfactory/issues) 
- - [Experiment Library](https://www.github.com/expfactory/experiments/issues)
- - [Survey Generator](https://www.github.com/expfactory/survey-generator/issues)
- - [Expfactory Builder](https://www.github.com/expfactory/expfactory-builder/issues)
- - [Expfactory Robots](https://www.github.com/expfactory/expfactory-robots/issues)
+ - [Experiment Factory Core](https://github.com/expfactory/expfactory/issues) 
+ - [Experiment Library](https://github.com/expfactory/experiments/issues)
+ - [Survey Generator](https://github.com/expfactory/survey-generator/issues)
+ - [Expfactory Builder](https://github.com/expfactory/expfactory-builder/issues)
+ - [Expfactory Robots](https://github.com/expfactory/expfactory-robots/issues)
 
-If your issue is for a particular experiment, open the issue at the respective repository for the [expfactory-experiments](https://www.github.com/expfactory-experiments) organization.
+If your issue is for a particular experiment, open the issue at the respective repository for the [expfactory-experiments](https://github.com/expfactory-experiments) organization.
 
 <div>
     <a href="/generate"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>

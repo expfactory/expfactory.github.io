@@ -34,7 +34,7 @@ This guide will walk you through contribution of an experiment. We are still dev
 ## Prerequisites
 
 ### Developer Pre-reqs
-You should understand basic html and css (or another web syntax of your choice) and how to create some form of web application that collects data and then can submit via a POST. If you are developing a web experiment, you should also understand how to bring up a basic web server to test your experiment. This is a very different approach from the first version of the Experiment Factory that expected a predictable template, and performed generation of an experiment behind the scenes. If you don't have all this knowledge, it's ok! Just [post an issue on our board](https://www.github.com/expfactory/expfactory/issues) and we will help. It's both fun to learn, and fun to participate in open source development.
+You should understand basic html and css (or another web syntax of your choice) and how to create some form of web application that collects data and then can submit via a POST. If you are developing a web experiment, you should also understand how to bring up a basic web server to test your experiment. This is a very different approach from the first version of the Experiment Factory that expected a predictable template, and performed generation of an experiment behind the scenes. If you don't have all this knowledge, it's ok! Just [post an issue on our board](https://github.com/expfactory/expfactory/issues) and we will help. It's both fun to learn, and fun to participate in open source development.
 
 ### Experiment Pre-reqs
 The most basic experiment contribution could be a web form, an intermediate contribution might be using a tool like jspsych to generate an experiment, and a more substantial contribution would use some web framework that requires "compiling" a final application (e.g., nodejs). Minimally, your final experiment must meet the following criteria:
@@ -115,7 +115,7 @@ Great! Once you are here, you have a folder with a working experiment. This is n
     "exp_id": "test-task",
     "description": "A short test task to press spacebar when you see the X.",
     "instructions": "Press the spacebar. Derp.",
-    "url": "https://www.github.com/expfactory-experiments/test-task",
+    "url": "https://github.com/expfactory-experiments/test-task",
     "template":"jspsych",
     "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
     "contributors": [
@@ -152,7 +152,7 @@ Your experiment will be tested when you submit a pull request (as we just showed
  - an **experiment** is a single folder with static content to serve an experiment. Usually
 this means an `index.html` file and associated style (css) and javascript (js), and the config.json
 we just talked about above. This test is appropriate if you've prepared an experiment folder but haven't yet pushed to Github.
- - a **contribution** is a submission of one or more experiments to the [library](https://www.github.com/expfactory/experiments),  meaning one or more markdown file intended to be added to the `_library` folder. The contribution tests also test the experiments, but retrieves them from your repository on Github. Thus, this test is useful when you've pushed your experiment to Github, and want to (locally) test if it's ready for the library.
+ - a **contribution** is a submission of one or more experiments to the [library](https://github.com/expfactory/experiments),  meaning one or more markdown file intended to be added to the `_library` folder. The contribution tests also test the experiments, but retrieves them from your repository on Github. Thus, this test is useful when you've pushed your experiment to Github, and want to (locally) test if it's ready for the library.
  - an **install** means that you've finished your experiment, and want to see it running in the experiments container.
 
 For the cases above, you can use the `quay.io/vanessa/expfactory-builder` image to run tests. It assumes mounting either a directory with one or more experiment subfolders. 
@@ -290,7 +290,7 @@ and it's contents would be:
 layout: experiment
 name:  "test-task"
 maintainer: "@vsoch"
-github: "https://www.github.com/expfactory-experiments/test-task"
+github: "https://github.com/expfactory-experiments/test-task"
 preview: "https://expfactory-experiments.github.io/test-task"
 tags:
 - test
@@ -319,7 +319,7 @@ and then push!
 git push origin add/breath-counting-task
 ```
 
-You should then be able to go to the [expfactory library](https://www.github.com/expfactory/experiments) interface and click the button to do a **pull request** that is **across forks** to the **expfactory master branch**. Github is usually pretty clever in knowing when you've recently commit to a branch associated with a repository. For example, when I browsed to the expfactory experiments library main repo, I saw:
+You should then be able to go to the [expfactory library](https://github.com/expfactory/experiments) interface and click the button to do a **pull request** that is **across forks** to the **expfactory master branch**. Github is usually pretty clever in knowing when you've recently commit to a branch associated with a repository. For example, when I browsed to the expfactory experiments library main repo, I saw:
 
 <div>
     <img src="/img/contribute/pull-request.png"><br>

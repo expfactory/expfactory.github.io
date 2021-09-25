@@ -33,7 +33,7 @@ Let's do this!
 The repository has a hidden folder, [.circleci](https://github.com/expfactory/builder-labjs/tree/master/.circleci) with the build and deploy setup that you need. The easiest way to get this to your computer is to fork it to your Github account, and then clone:
 
 ```bash
-git clone https://www.github.com/<username>/builder-labjs
+git clone https://github.com/<username>/builder-labjs
 cd builder-labjs
 ```
 
@@ -79,7 +79,7 @@ test-task tower-of-london
 
 ## 2. Build
 We now will recruit the builder to turn our folder into a reproducible experiment container!
-Unlike the instructions in [expfactory-labjs](https://www.github.com/expfactory/expfactory-labjs),
+Unlike the instructions in [expfactory-labjs](https://github.com/expfactory/expfactory-labjs),
 we don't need to do any building or use of Docker locally. We just need to:
 
  1. Create a container repository on Docker Hub to correspond to the name you want to build

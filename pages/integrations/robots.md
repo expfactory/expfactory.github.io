@@ -11,7 +11,7 @@ The Experiment Factory robots are a set of scripts (and associated containers) t
  
 [![asciicast](https://asciinema.org/a/153497.png)](https://asciinema.org/a/153497?speed=3)
 
-For complete setup and usage, see the most updated docs in the [Github repository](https://www.github.com/expfactory/expfactory-robots). Here we will review a "quick start" with a Singularity image.
+For complete setup and usage, see the most updated docs in the [Github repository](https://github.com/expfactory/expfactory-robots). Here we will review a "quick start" with a Singularity image.
 
 
 ## Singularity Usage
@@ -22,11 +22,11 @@ singularity pull --name expfactory-robots.simg shub://expfactory/expfactory-robo
 ./expfactory-robots.simg --help
 ```
 
-To run the image, you will basically want to bind the *parent* folder where your task is to `/data` in the container, and specify the path to the experiment *relative to `data`* In the example below, we have cloned the [test-task](https://www.github.com/expfactory-experiments/test-task) folder in `/tmp` (`/tmp/test-task`).
+To run the image, you will basically want to bind the *parent* folder where your task is to `/data` in the container, and specify the path to the experiment *relative to `data`* In the example below, we have cloned the [test-task](https://github.com/expfactory-experiments/test-task) folder in `/tmp` (`/tmp/test-task`).
 
 
 ```
-cd /tmp && git clone https://www.github.com/expfactory-experiments/test-task
+cd /tmp && git clone https://github.com/expfactory-experiments/test-task
 ```
 
 and now you can run the robot:
@@ -59,7 +59,7 @@ LOG FINISHING TEST OF EXPERIMENT
 LOG [done] stopping web server...
 ```
 
-The same can be done for a survey folder (e.g., [bis11](https://www.github.com/expfactory-experiments/bis11-survey)), but specify the `--robot`
+The same can be done for a survey folder (e.g., [bis11](https://github.com/expfactory-experiments/bis11-survey)), but specify the `--robot`
 
 ```
 singularity run --bind /tmp:/data expfactory-robots.simg /data/bis11-survey

@@ -26,9 +26,9 @@ This general workflow using the experiment factory builder means that you could 
  - go back and use the same version of the builder to re-create your experiment container, or a slight derivation of it
  - (developers) contribute to the core expfactory Python software to enhance the builder, or [another integration or tool](/integrations).
 
-If you have not heard of Docker we recommend that you [read about it first](https://www.docker.com/what-container) and go through a [getting started](https://docs.docker.com/get-started/) tutorial. When you are ready, come back here and try out the quick start. If you have any questions, [please don't hesitate to ask](https://www.github.com/expfactory/expfactory/issues).
+If you have not heard of Docker we recommend that you [read about it first](https://www.docker.com/what-container) and go through a [getting started](https://docs.docker.com/get-started/) tutorial. When you are ready, come back here and try out the quick start. If you have any questions, [please don't hesitate to ask](https://github.com/expfactory/expfactory/issues).
 
-Do you have more questions? Please [post an issue](https://www.github.com/expfactory/expfactory/issues).
+Do you have more questions? Please [post an issue](https://github.com/expfactory/expfactory/issues).
 
 <div>
     <a href="/"><button class="previous-button btn btn-primary"><i class="fa fa-chevron-left"></i> </button></a>

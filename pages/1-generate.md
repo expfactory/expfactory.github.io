@@ -33,10 +33,13 @@ What experiments do you want in your container? Let's see the ones that are avai
 docker run quay.io/vanessa/expfactory-builder list
 ```
 
-Cool, I like `digit-span`, `spatial-span`, `test-task`, and `tower-of-london`.
+Cool, I like `digit-span`, `spatial-span`, `test-task`, and `tower-of-london`. Notice here
+that we are running as our user so the resulting files don't have permissions issues.
 
 ```
-docker run -v $PWD:/data quay.io/vanessa/expfactory-builder build digit-span spatial-span tower-of-london test-task 
+docker run -v $PWD:/data --user "$(id -u):$(id -g)" \ 
+    quay.io/vanessa/expfactory-builder build \
+    digit-span spatial-span tower-of-london test-task 
 ```
 
 Let's build the container from the Dockerfile! We are going to name it `expfactory/experiments`
@@ -58,6 +61,7 @@ Open your browser to localhost ([http://127.0.0.1](http://127.0.0.1)) to see the
 
 
 # Detailed Start
+
 The generation of a container comes down to adding the experiments to a text file that records all the commands to generate your container. Since we are using Docker, this file will be the Dockerfile, and you should [install Docker](https://docs.docker.com/engine/installation/) first and be comfortable with the basic usage. In these sections, we will be building your container from a customized file. You will be doing the following:
 
  - generating a recipe with (reproducible) steps to build a custom container
@@ -67,6 +71,7 @@ Note that if you want to deploy a container with https, you should read our [htt
 
 
 ## The Expfactory Builder Image
+
 Both of these steps start with the expfactory builder container. 
 We've [provided an image](https://quay.io/repository/vanessa/expfactory-builder?tab=tags) that will generate a Dockerfile, and from it you can build your Docker image.  
 Note that bases for expfactory were initially provided on [Docker Hub](https://hub.docker.com/r/vanessa/expfactory-builder/tags) and have moved to [Quay.io](https://quay.io/repository/vanessa/expfactory-builder?tab=tags). Dockerfiles in the repository that use the expfactory-builder are also updated. If you need a previous version, please see the tags on the original Docker Hub. We don't build the image within the same 
@@ -98,26 +103,27 @@ docker run quay.io/vanessa/expfactory-builder list
 
 Expfactory Version: 3.0
 Experiments
-1  adaptive-n-back	https://www.github.com/expfactory-experiments/adaptive-n-back
-2  breath-counting-task	https://www.github.com/expfactory-experiments/breath-counting-task
-3  dospert-eb-survey	https://www.github.com/expfactory-experiments/dospert-eb-survey
-4  dospert-rp-survey	https://www.github.com/expfactory-experiments/dospert-rp-survey
-5  dospert-rt-survey	https://www.github.com/expfactory-experiments/dospert-rt-survey
-6  test-task	https://www.github.com/expfactory-experiments/test-task
-7  tower-of-london	https://www.github.com/expfactory-experiments/tower-of-london
+1  adaptive-n-back	https://github.com/expfactory-experiments/adaptive-n-back
+2  breath-counting-task	https://github.com/expfactory-experiments/breath-counting-task
+3  dospert-eb-survey	https://github.com/expfactory-experiments/dospert-eb-survey
+4  dospert-rp-survey	https://github.com/expfactory-experiments/dospert-rp-survey
+5  dospert-rt-survey	https://github.com/expfactory-experiments/dospert-rt-survey
+6  test-task	https://github.com/expfactory-experiments/test-task
+7  tower-of-london	https://github.com/expfactory-experiments/tower-of-london
 ```
 
 Try using grep if you want to search for a term in the name or url
 
 ```
 docker run quay.io/vanessa/expfactory-builder list | grep survey
-2  alcohol-drugs-survey	https://www.github.com/expfactory-experiments/alcohol-drugs-survey
-4  dospert-eb-survey	https://www.github.com/expfactory-experiments/dospert-eb-survey
-5  dospert-rp-survey	https://www.github.com/expfactory-experiments/dospert-rp-survey
-6  dospert-rt-survey	https://www.github.com/expfactory-experiments/dospert-rt-survey
+2  alcohol-drugs-survey	https://github.com/expfactory-experiments/alcohol-drugs-survey
+4  dospert-eb-survey	https://github.com/expfactory-experiments/dospert-eb-survey
+5  dospert-rp-survey	https://github.com/expfactory-experiments/dospert-rp-survey
+6  dospert-rt-survey	https://github.com/expfactory-experiments/dospert-rt-survey
 ```
 
 ## Local Experiment Selection
+
 If you have experiments on your local machine where an experiment is defined based on [these criteria](/contribute#experiment-pre-reqs) or more briefly:
 
  - the config.json has all required fields
@@ -190,7 +196,7 @@ This is really great! Now we can add the `Dockerfile` and `startscript.sh` to ou
 
 LABEL EXPERIMENT_test-task /scif/apps/test-task
 WORKDIR /scif/apps
-RUN expfactory install https://www.github.com/expfactory-experiments/test-task
+RUN expfactory install https://github.com/expfactory-experiments/test-task
 
 LABEL EXPERIMENT_test-task-two /scif/apps/test-task-two
 ADD test-task-two /scif/apps/test-task-two
@@ -487,22 +493,22 @@ url again? Let's ask...
 expfactory list
 Expfactory Version: 3.0
 Experiments
-1  adaptive-n-back	https://www.github.com/expfactory-experiments/adaptive-n-back
-2  alcohol-drugs-survey	https://www.github.com/expfactory-experiments/alcohol-drugs-survey
-3  breath-counting-task	https://www.github.com/expfactory-experiments/breath-counting-task
-4  digit-span	https://www.github.com/expfactory-experiments/digit-span
-5  dospert-eb-survey	https://www.github.com/expfactory-experiments/dospert-eb-survey
-6  dospert-rp-survey	https://www.github.com/expfactory-experiments/dospert-rp-survey
-7  dospert-rt-survey	https://www.github.com/expfactory-experiments/dospert-rt-survey
-8  spatial-span	https://www.github.com/expfactory-experiments/spatial-span
-9  test-task	https://www.github.com/expfactory-experiments/test-task
-10 tower-of-london	https://www.github.com/expfactory-experiments/tower-of-london
+1  adaptive-n-back	https://github.com/expfactory-experiments/adaptive-n-back
+2  alcohol-drugs-survey	https://github.com/expfactory-experiments/alcohol-drugs-survey
+3  breath-counting-task	https://github.com/expfactory-experiments/breath-counting-task
+4  digit-span	https://github.com/expfactory-experiments/digit-span
+5  dospert-eb-survey	https://github.com/expfactory-experiments/dospert-eb-survey
+6  dospert-rp-survey	https://github.com/expfactory-experiments/dospert-rp-survey
+7  dospert-rt-survey	https://github.com/expfactory-experiments/dospert-rt-survey
+8  spatial-span	https://github.com/expfactory-experiments/spatial-span
+9  test-task	https://github.com/expfactory-experiments/test-task
+10 tower-of-london	https://github.com/expfactory-experiments/tower-of-london
 ```
 
 Ah yes, let's install test-task:
 
 ```
-$ expfactory install https://www.github.com/expfactory-experiments/test-task
+$ expfactory install https://github.com/expfactory-experiments/test-task
 Expfactory Version: 3.0
 Cloning into '/tmp/tmp5xn6oc4v/test-task'...
 remote: Counting objects: 62, done.
@@ -528,7 +534,7 @@ You then should have the new experiment installed in the container! Remember, yo
 docker run -v $PWD:/data quay.io/vanessa/expfactory-builder build digit-span test-task 
 ```
 
-If you have any questions about the above, or want more detail, please [get in touch](https://www.github.com/expfactory/issues) as I am looking to develop this.
+If you have any questions about the above, or want more detail, please [get in touch](https://github.com/expfactory/issues) as I am looking to develop this.
 
 
 Now that you are comfortable generating your container, check out how to [customize it](/customize).
