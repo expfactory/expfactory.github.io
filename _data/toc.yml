@@ -1,41 +1,60 @@
-  - title: "The Experiment Factory"
-    url: "/"
-    slug: expfactory
+- title: "Background"
+  url: "background"
+- title: "Getting Started"
+  url: "generate"
+  children:
+    - title: Quick Start
+      url: "generate#quick-start"
+    - title: Detailed Start
+      url: "generate#detailed-start"
+    - title: Customization
+      url: "customize"
+    - title: HTTPS container
+      url: "generate-https"
+- title: "User Guide"
+  url: "usage"
+  children:
+    - title: Usage
+      url: usage     
+    - title: Experiment Variables
+      url: usage#summary-of-variables
+    - title: Start a Container
+      url: usage#start-the-container
+    - title: Headless Start
+      url: usage#start-a-headless-experiment-container
+    - title: Container Logs
+      url: usage#container-logs
+    - title: User Management
+      url: usage#user-management
+    - title: Saving Data
+      url: usage#saving-data
+    - title: Start your Participant
+      url: usage#start-your-participant
+    - title: The Experiment Portal
+      url: usage#the-experiment-factory-portal
+    - title: Working with JSON
+      url: usage#working-with-json
+    - title: "Interactive Development"
+      url: "development"
+    - title: PDF
+      url: pdf     
+- title: "Contribute"
+  url: "contribute"
+  children:
+    - title: Contribute a Container
+      url: "contribute#contribute-a-container"
+    - title: Contribute an Experiment
+      url: "contribute#contribute-an-experiment"
+    - title: Contribute a Survey
+      url: "contribute#contribute-a-survey"
+- title: "Integrations"
+  url: "integrations"
+  children:
+    - title: Surveys
+      url: "integration-surveys"
+    - title: Robots
+      url: "integration-robots"
+    - title: LabJS
+      url: "integration-labjs"
 
-  - title: "Experiment Library"
-    url: "https://expfactory.github.io/experiments/"
-    slug: experiments
 
-  - title: "Background"
-    url: "/background"
-    slug: background
-
-  - title: "Generate an Experiment Container"
-    url: "/generate"
-    slug: generate
-    sections:
-      - title: Quick Start
-        slug: quick-start
-      - title: Detailed Start
-        slug: detailed-start
-
-  - title: "Experiment Container Usage"
-    url: "/usage"
-    slug: usage
-
-  - title: "Interactive Development"
-    url: "/development"
-    slug: development
-
-  - title: "Contribute an Experiment"
-    url: "/contribute"
-    slug: contribute
-    sections:
-      - title: "Contribute a Container"
-        slug: contribute-a-container
-      - title: "Contribute an Experiment"
-        slug: contribute-an-experiment
-
-  - title: "Integrations"
-    url: "/integrations"
-    slug: integrations

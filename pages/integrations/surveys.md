@@ -1,5 +1,4 @@
 ---
-layout: default
 title: Surveys Integrations
 pdf: true
 permalink: /integration-surveys

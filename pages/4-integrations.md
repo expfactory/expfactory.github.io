@@ -1,5 +1,4 @@
 ---
-layout: default
 title: Integrations
 pdf: true
 permalink: /integrations

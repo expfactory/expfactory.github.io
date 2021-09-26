@@ -1,25 +1,62 @@
-# Setup
-title:        The Experiment Factory
-tagline:      ""
-baseurl:      "/"
-repo:       "https://github.com/expfactory/expfactory.github.io"
+title: The Experiment Factory
+email: vsoch@users.noreply.github.com
+author: "@vsoch"
+description: Reproducible, container based experiments.
 
-# About/contact
-author:
-  name:       Vanessa Sochat
-  url:        https://expfactory.github.io
+# DO NOT CHANGE THE LINE OF THIS FILE without editing .circleci/circle_urls.sh
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site
 
-# Version
-version: 3.1.0
+# Social (First three Required)
+repo: "https://github.com/expfactory/expfactory.github.io"
+github_user: "expfactory"
+github_repo: "expfactory"
+
+# Optional
+twitter: vsoch
+
+# logo: "assets/img/logo/SRCC-square-red.png"
+logo_width: 34
+color: "#f2df49" # primary color for header, buttons
+
+# Build settings
+markdown: kramdown
+
+# If you add tags to pages, you can link them to some external search
+# If you want to disable this, comment the URL.
+# tag_search_endpoint: https://ask.cyberinfrastructure.org/search?q=
+tag_color: info # danger, success, warning, primary, info, secondary
+
+accentColor: blue # purple, green, etc.
+themeColor: blue # purple, green, blue, orange, purple, grey
+fixedNav: 'true' # true or false
+
+permalink: /:year/:title/
+markdown: kramdown
+exclude: [_site, CHANGELOG.md, LICENSE, README.md, vendor]
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path
 
 # Defaults
 defaults:
+  - scope:
+      path: "_docs"
+      type: "docs"
+    values:
+      layout: page
   -
     scope:
       path: ""
       type: "pages"
     values:
-      layout: "default"
-
-#Others
-markdown: kramdown
+      layout: "page"
+  -
+    scope:
+      path: "posts"
+      type: "posts"
+    values:
+      layout: "post"

@@ -1,13 +1,10 @@
 ---
-layout: default
 title: The Experiment Factory
 pdf: true
 permalink: /
 ---
 
-<div style="float:right; margin-bottom:50px; color:#666">
-Version: {{ site.version }}<br>
-</div>
+# The Experiment Factory
 
 <div>
     <img src="img/expfactoryticketyellow.png" style="float:left">

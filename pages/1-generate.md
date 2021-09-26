@@ -1,16 +1,16 @@
 ---
-layout: default
 title: Generate your Experiment Container
 pdf: true
 permalink: /generate
-toc: true
 ---
 
+# Generate an Experiment Container
 
-# Really Quick Start
+## Really Quick Start
+
 Pull our pre-generated example containers, and start! Your experiment portal is at [http://127.0.0.1](http://127.0.0.1) in your browser.
 
-```
+```bash
 docker run -p 80:80 vanessa/expfactory-experiments start
 docker run -p 80:80 vanessa/expfactory-surveys start
 docker run -p 80:80 vanessa/expfactory-games start
@@ -18,25 +18,25 @@ docker run -p 80:80 vanessa/expfactory-games start
 
 These [container recipes](/experiments/recipes) are derived from tags in our library. Feel free to use one for the examples below.
 
-# Quick Start
+## Quick Start
 
 Make a folder. This will be a place to generate your Dockerfile.
 
-```
+```bash
 mkdir -p /tmp/my-experiment/data
 cd /tmp/my-experiment
 ```
 
 What experiments do you want in your container? Let's see the ones that are available!
 
-```
+```bash
 docker run quay.io/vanessa/expfactory-builder list
 ```
 
 Cool, I like `digit-span`, `spatial-span`, `test-task`, and `tower-of-london`. Notice here
 that we are running as our user so the resulting files don't have permissions issues.
 
-```
+```bash
 docker run -v $PWD:/data --user "$(id -u):$(id -g)" \ 
     quay.io/vanessa/expfactory-builder build \
     digit-span spatial-span tower-of-london test-task 
@@ -44,14 +44,14 @@ docker run -v $PWD:/data --user "$(id -u):$(id -g)" \
 
 Let's build the container from the Dockerfile! We are going to name it `expfactory/experiments`
 
-```
+```bash
 docker build -t expfactory/experiments .
 
 ```
 
 Now let's start it.
 
-```
+```bash
 docker run -v /tmp/my-experiment/data/:/scif/data \
            -d -p 80:80 \
            expfactory/experiments start 
@@ -60,7 +60,7 @@ docker run -v /tmp/my-experiment/data/:/scif/data \
 Open your browser to localhost ([http://127.0.0.1](http://127.0.0.1)) to see the portal [portal](2-usage.md). For specifying a different database or study identifier, read the detailed start below, and then how to [customize your container runtime](#customize-your-container). When you are ready to run (and specify a particular database type) read [the usage docs](2-usage.md).
 
 
-# Detailed Start
+## Detailed Start
 
 The generation of a container comes down to adding the experiments to a text file that records all the commands to generate your container. Since we are using Docker, this file will be the Dockerfile, and you should [install Docker](https://docs.docker.com/engine/installation/) first and be comfortable with the basic usage. In these sections, we will be building your container from a customized file. You will be doing the following:
 
@@ -70,7 +70,7 @@ The generation of a container comes down to adding the experiments to a text fil
 Note that if you want to deploy a container with https, you should read our [https generation](/generate-https) page, and then come back here to read about [interaction with your container](/generate#shell-into-your-container).
 
 
-## The Expfactory Builder Image
+### The Expfactory Builder Image
 
 Both of these steps start with the expfactory builder container. 
 We've [provided an image](https://quay.io/repository/vanessa/expfactory-builder?tab=tags) that will generate a Dockerfile, and from it you can build your Docker image.  
@@ -78,7 +78,7 @@ Note that bases for expfactory were initially provided on [Docker Hub](https://h
 container for the explicit purpose that you should keep a copy of the recipe
 Dockerfile at hand. The basic usage is to run the image, and you can either build, test, or list.
 
-```
+```bash
 $ docker run quay.io/vanessa/expfactory-builder
 
 Usage:
@@ -91,14 +91,15 @@ Usage:
 
 We will discuss each of these commands in more detail.
 
-## Library Experiment Selection
+### Library Experiment Selection
+
 The first we've already used, and it's the only required argument. We need to give the
 expfactory builder a list of `experiments`. You can either [browse
 the table](https://expfactory.github.io/experiments/) or see a current library list with `list.`
 We also have some pre-generated commands in our [recipes portal](/experiments/recipes).
 Here is how to list all the experiments in the library:
 
-```
+```bash
 docker run quay.io/vanessa/expfactory-builder list
 
 Expfactory Version: 3.0
@@ -114,7 +115,7 @@ Experiments
 
 Try using grep if you want to search for a term in the name or url
 
-```
+```bash
 docker run quay.io/vanessa/expfactory-builder list | grep survey
 2  alcohol-drugs-survey	https://github.com/expfactory-experiments/alcohol-drugs-survey
 4  dospert-eb-survey	https://github.com/expfactory-experiments/dospert-eb-survey
@@ -122,7 +123,7 @@ docker run quay.io/vanessa/expfactory-builder list | grep survey
 6  dospert-rt-survey	https://github.com/expfactory-experiments/dospert-rt-survey
 ```
 
-## Local Experiment Selection
+### Local Experiment Selection
 
 If you have experiments on your local machine where an experiment is defined based on [these criteria](/contribute#experiment-pre-reqs) or more briefly:
 
@@ -133,12 +134,13 @@ If you have experiments on your local machine where an experiment is defined bas
 
 Then you can treat a local path to an experiment folder as an experiment in the list to give to build. Since we will be working from a mapped folder in a Docker container, this comes down to providing the experiment name under the folder it is mapped to, `/data`. Continue reading for an example
 
-## Dockerfile Recipe Generation
+### Dockerfile Recipe Generation
+
 To generate a Dockerfile to build our custom image, we need to run expfactory in the container,
 and mount a folder to write the Dockerfile. If we are installing local experiments, they should be in this folder. The folder
 should not already contain a Dockerfile, and we recommend that you set this folder up with version control (a.k.a. Github). That looks like this:
 
-```
+```bash
 mkdir -p /tmp/my-experiment/data
 docker run -v /tmp/my-experiment:/data \
               quay.io/vanessa/expfactory-builder \
@@ -153,7 +155,7 @@ To build, cd to recipe and:
 
 If you are building from local experiment folders, then it is recommended to generate the Dockerfile in the same folder as your experiments. You should (we hope!) also have this directory under version control (it should have a `.git` folder, as shown in the example below). For example, let's say I am installing local experiment `test-task-two` under a version controlled directory `experiments`, along with `test-task` from the library. The structure would look like this:
 
-```
+```bash
 experiments/
 ├── .git/
 └── test-task-two
@@ -161,7 +163,7 @@ experiments/
 
 I would then mount the present working directory (`experiments`) to `/data` in the container, and give the build command both the path to the directory in the container `data/test-task-two` and the exp_id for `test-task`, which will be retrieved from Github.
 
-```
+```bash
 docker run -v $PWD:/data \
               quay.io/vanessa/expfactory-builder \
               build test-task \
@@ -178,7 +180,7 @@ To build, cd to directory with Dockerfile and:
 
 Note that it gives you a warning about a local installation. This message is saying that if someone finds your Dockerfile without the rest of the content in the folder, it won't be buildable because it's not obtained from a version controlled repository (as the library experiments are). We can now see what was generated:
 
-```
+```bash
 experiments/
 ├── .git/
 ├── Dockerfile
@@ -188,7 +190,7 @@ experiments/
 
 This is really great! Now we can add the `Dockerfile` and `startscript.sh` to our repository, so even if we decide to not add our experiments to the official [library](https://expfactory.github.io/experiments/) others will still be able to build our container. We can also inspect the file to see the difference between a local install and a library install: 
 
-```
+```dockerfile
 ########################################
 # Experiments
 ########################################
@@ -206,7 +208,7 @@ RUN expfactory install test-task-two
 
 The library install (top) clones from Github, and the local install adds the entire experiment from your folder first. This is why it's recommended to do the build where you develop your experiments. While you aren't required to and could do the following to build in `/tmp/another_base`:
 
-```
+```bash
 docker run -v /tmp/another_base:/data \
               quay.io/vanessa/expfactory-builder \
               build test-task /data/test-task-two
@@ -216,7 +218,7 @@ and your experiments will be copied fully there to still satisfy this condition,
 
 Finally, before you generate your recipe, in the case that you want "hard coded" defaults (e.g., set as defaults for future users) read the [custom build](#custom-conriguration) section below to learn about the variables that you can customize. If not, then rest assured that these values can be specified when a built container is started.
 
-### Examples 
+#### Examples 
 
 **Repeated Measures Designs**
 
@@ -234,7 +236,7 @@ What we are basically going to do is copy an entire folder, and rename the exper
 to correspond with the renamed folder. This comes down to first adding the 
 following lines to your Dockerfile to build the two ant tasks: 
 
-```
+```dockerfile
 LABEL EXPERIMENT_ant1 /scif/apps/ant1
 ADD ant1 /scif/apps/ant1
 WORKDIR /scif/apps
@@ -248,14 +250,14 @@ RUN expfactory install ant2
 
 Next, clone the repository into your build folder, and rename it:
 
-```
+```bash
 $ git clone https://github.com/earcanal/attention-network-task
 $ mv attention-network-task/ ant1
 ```
 
 Set `exp_id` to match the folder name in `ant1/config.json`:
 
-```
+```json
    "exp_id": "ant1",
 ```
 
@@ -264,11 +266,11 @@ Repeat this cloning/renaming process, giving the second folder the name `ant2`.
 You can now build a container with two ANT tasks that you can run before and after your treatment tasks.  You can repeat this process as many times as you like in case you need more than two measurements from the same task/survey.
 
 
-## Container Generation
+### Container Generation
 
 Starting from the folder where we generated our Dockerfile, we can now build the experiment container. Note that when you have a production container you don't need to build locally each time, you can use an [automated build from a Github repository to Docker Hub](https://docs.docker.com/docker-hub/builds/) - this would mean that you can push to the repository and have the build done automatically, or that you can manually trigger it. For this tutorial, we will build locally:
 
-```
+```bash
 experiments/
 ├── Dockerfile
 └── startscript.sh
@@ -277,7 +279,7 @@ experiments/
 
 and if we have local experiments, we would see them as well:
 
-```
+```bash
 experiments/
 ├── Dockerfile
 ├── startscript.sh
@@ -290,7 +292,7 @@ metadata to describe the image. Look at the [label.schema](http://label-schema.o
 inspiration. Then build the image, and replace `expfactory/experiments` with whatever namespace/container you
 want to give to the image. It's easy to remember to correspond to your Github repository (`username/reponame`).
 
-```
+```bash
 docker build -t expfactory/experiments .
 
 # if you don't want to use cache
@@ -300,11 +302,12 @@ docker build --no-cache -t expfactory/experiments .
 Don't forget the `.` at the end! It references the present working directory with the Dockerfile. If you are developing and need to update your container, the fastest thing to do is to change files locally, and build again (and removing --no-cache should be OK).
 
 
-## Start your Container
+### Start your Container
+
 After you do the above steps, your custom container will exist on your local machine.
 First, let's pretend we haven't a clue what it does, and just run it:
 
-```
+```bash
 $ docker run expfactory/experiments
 
     Usage:
@@ -355,7 +358,7 @@ For this first go, we aren't going to map the data folder. This way I can show y
 Remember, the above is *without* SSL (https)! If you want to deploy an https container,
 see [these docs](/generate-https).
 
-```
+```bash
 docker run -p 80:80 expfactory/experiments start
 
 Starting Web Server
@@ -380,7 +383,7 @@ see your experiment interface! When you select an experiment, the general url wi
 something like `http://127.0.0.1/experiments/tower-of-london`. Now try hitting "Control+C" in the terminal where the server is running. You will see it exit. Refresh the browser, and see that the experiment is gone too. What we actually want to do is run the server in `detached` mode. After you've Control+C, try adding a `-d` to the original command. This means detached.
 
 
-```
+```bash
 docker run -d -p 80:80 vanessa/experiment start
 2c503ddf6a7a0f2a629fa2e55276e220246320291c14f6393a33ef54ab5d512a
 ```
@@ -389,7 +392,7 @@ The long identifier spit out is the container identifier, and we will reference 
 Try running `docker ps` to list your active containers - you will see it is the first one! And look at the 
 `CONTAINER_ID`:
 
-```
+```bash
 $ docker ps
 CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                          NAMES
 2c503ddf6a7a        vanessa/experiment   "/bin/bash /starts..."   10 minutes ago      Up 10 minutes       0.0.0.0:80->80/tcp, 5000/tcp   zealous_raman
@@ -403,7 +406,7 @@ It's important that you know how to shell into your container for interactive de
 general knowledge about Docker. First, open up a new terminal. As we did above, we used `docker ps`
 to see our running container:
 
-```
+```bash
 $ docker ps
 CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                          NAMES
 2c503ddf6a7a        vanessa/experiment   "/bin/bash /starts..."   10 minutes ago      Up 10 minutes       0.0.0.0:80->80/tcp, 5000/tcp   zealous_raman
@@ -413,28 +416,28 @@ The cool part is that it shows us what we already know - port 80 in the containe
 
 To shell and work interactively in the image:
 
-```
+```bash
 docker exec -it 2c503ddf6a7a bash
 root@2c503ddf6a7a:/scif/apps# 
 ```
 
 We shell into the `/scif/apps` directory - we are inside the container, with our installed experiments! Take a look!
 
-```
+```bash
 $ ls
    tower-of-london
 ```
 
 Here are the logs we were looking at:
 
-```
+```bash
 $ ls /scif/logs
 gunicorn-access.log  gunicorn.log  expfactory.log
 ```
 
 Importantly, our data is to be saved under `/scif/data`, which we would map to our local machine (so the generated data doesn't disappear when we remove the container).
 
-```
+```bash
 ls /scif/data/
 expfactory
 ```
@@ -442,15 +445,16 @@ expfactory
 Right now the folder is empty because we haven't had anyone do the experiment yet. Try navigating back to ([http://127.0.0.1](http://127.0.0.1)) in
 your browser, and completing a round of the task. Here I am from outside the container. Remember I've mapped `/tmp/my-experiment/data` to `/scif/data` in the image. My study id is `expfactory` and the first participant has just finished:
 
-```
+```bash
 $ ls data/expfactory/00000/
 test-task-results.json
 ```
 
-## Stopping your Container
+### Stopping your Container
+
 For the first example that we did without detached (`-d`) if you pressed Control+C for the terminal with the container started, you will kill the process and stop the container. This would happen regardless if you were shelled in another container, because the start script exits. However, now that we have it running in this detached state, we need to stop it using the docker daemon, and don't forget to remove it:
 
-```
+```bash
 docker stop 2c503ddf6a7a
 docker rm 2c503ddf6a7a
 ```
@@ -458,7 +462,8 @@ docker rm 2c503ddf6a7a
 You can also use the name.
 
 
-## Adding Experiments
+### Adding Experiments
+
 While we encourage you to re-generate the file with the `quay.io/vanessa/expfactory-builder` so generation of your
 container is reproducible, it's possible to install experiments into your container after it's generated. You
 should only do this for development, as changes that you make to your container that are not recorded in the Dockerfile
@@ -467,7 +472,7 @@ are not reproducible. Let's say that we have an experiment container that has on
 
 First let's create our container fresh, find the name, and shell into it:
 
-```
+```bash
 $ docker run -p 80:80 vanessa/experiment start
 
 # What's the name?
@@ -480,7 +485,7 @@ docker exec -it 9e256e1b1473 bash
 
 We can see the one experiment installed, it was the one in our Dockerfile:
 
-```
+```bash
 $ docker exec -it vigorous_lovelace bash
 root@9e256e1b1473:/scif/apps# ls
 tower-of-london
@@ -489,7 +494,7 @@ tower-of-london
 Now let's install a new one! Remember we need to be in `/scif/apps` to install the experiment there. What was the Github 
 url again? Let's ask...
 
-```
+```bash
 expfactory list
 Expfactory Version: 3.0
 Experiments
@@ -507,7 +512,7 @@ Experiments
 
 Ah yes, let's install test-task:
 
-```
+```bash
 $ expfactory install https://github.com/expfactory-experiments/test-task
 Expfactory Version: 3.0
 Cloning into '/tmp/tmp5xn6oc4v/test-task'...
@@ -523,14 +528,14 @@ LOG Preparing experiment routes...
 Now you are probably navigating to your web interface at ([http://127.0.0.1](http://127.0.0.1)) and confused that the new experiment
 isn't there. The easiest way to restart all the moving pieces is to (from outside the container) restart it. Let's exit, and do that.
 
-```
+```bash
 $ exit
 docker restart 9e256e1b1473
 ```
 
 You then should have the new experiment installed in the container! Remember, you would want to go back and (properly) produce this:
 
-```
+```bash
 docker run -v $PWD:/data quay.io/vanessa/expfactory-builder build digit-span test-task 
 ```
 
