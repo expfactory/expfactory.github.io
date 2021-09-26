@@ -16,7 +16,7 @@ permalink: /
 The Experiment Factory software will help you create a reproducible container to deploy behavioral experiments. Want to jump right in? Choose one of our demo containers, and browse to localhost:</p>
 
 
-```
+```bash
 docker run -p 80:80 vanessa/expfactory-games start
 docker run -p 80:80 vanessa/expfactory-surveys start
 docker run -p 80:80 vanessa/expfactory-experiments start
