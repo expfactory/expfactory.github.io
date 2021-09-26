@@ -22,20 +22,20 @@ docker run -p 80:80 vanessa/expfactory-surveys start
 docker run -p 80:80 vanessa/expfactory-experiments start
 ```
 
-If you want a more gentle introduction, start with reading some [background](pages/0-background.md) on containers and why the Experiment Factory exists in the first place. Then move on to our quick start to [generate](https://expfactory.github.io/generate#quick-start) your own experiment container. Please [give feedback](https://github.com/expfactory/expfactory/issues) about your needs to further develop the software. The [library](https://expfactory.github.io/experiments/) will show you a selection to choose from, including all experiments, surveys, and games migrated from [the legacy Expfactory](https://github.com/expfactory/expfactory-experiments). If you have web-based experiments to contribute, please [reach out](https://github.com/expfactory/expfactory/issues)! Your contributions and feedback are greatly appreciated!
+If you want a more gentle introduction, start with reading some [background]({{ site.baseurl }}/background) on containers and why the Experiment Factory exists in the first place. Then move on to our quick start to [generate](https://expfactory.github.io/generate#quick-start) your own experiment container. Please [give feedback](https://github.com/expfactory/expfactory/issues) about your needs to further develop the software. The [library](https://expfactory.github.io/experiments/) will show you a selection to choose from, including all experiments, surveys, and games migrated from [the legacy Expfactory](https://github.com/expfactory/expfactory-experiments). If you have web-based experiments to contribute, please [reach out](https://github.com/expfactory/expfactory/issues)! Your contributions and feedback are greatly appreciated!
 
 ## User Guide
 
- - [Background](pages/0-background.md) for a gentle introduction to containers before the quick start.
- - [Generate](pages/1-generate.md) quick starts to generating containers.
- - [Customize](pages/2-customize.md) customize container and runtime variables, the database, and other settings.
- - [Usage](pages/3-usage.md) of an experiment factory container.
- - [Integrations](pages/4-integrations.md) including automated experiment testing robots, generators, and third party tools.
+ - [Background]({{ site.baseurl }}/background) for a gentle introduction to containers before the quick start.
+ - [Generate]({{ site.baseurl }}/generate) quick starts to generating containers.
+ - [Customize]({{ site.baseurl }}/customize) customize container and runtime variables, the database, and other settings.
+ - [Usage]({{ site.baseurl }}/usage) of an experiment factory container.
+ - [Integrations]({{ site.baseurl }}/integrations) including automated experiment testing robots, generators, and third party tools.
 
 ## Developer Guide
 
- - [Contribute](pages/5-contribute.md) an experiment to the [library](https://github.com/expfactory/experiments) for others to use.
- - [Interactive Development](pages/6-develop.md) suggested practice to develop and debug an experiment interactively in the container
+ - [Contribute]({{ site.baseurl }}/contribute) an experiment to the [library](https://github.com/expfactory/experiments) for others to use.
+ - [Interactive Development]({{ site.baseurl }}/develop) suggested practice to develop and debug an experiment interactively in the container
 
 ## Library
 
