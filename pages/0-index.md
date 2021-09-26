@@ -35,7 +35,7 @@ If you want a more gentle introduction, start with reading some [background]({{ 
 ## Developer Guide
 
  - [Contribute]({{ site.baseurl }}/contribute) an experiment to the [library](https://github.com/expfactory/experiments) for others to use.
- - [Interactive Development]({{ site.baseurl }}/develop) suggested practice to develop and debug an experiment interactively in the container
+ - [Interactive Development]({{ site.baseurl }}/development) suggested practice to develop and debug an experiment interactively in the container
 
 ## Library
 
