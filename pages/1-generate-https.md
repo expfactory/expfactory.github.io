@@ -1,11 +1,10 @@
 ---
-layout: default
 title: Generate an HTTPS Experiment Container
-pdf: true
 permalink: /generate-https
 toc: true
 ---
 
+# Generate an HTTPS Experiment Container
 
 This section will walk through creating a container with https. Much of the steps
 are the same, but the build and run arguments are a bit different. We will also provide
@@ -31,17 +30,17 @@ Now that you have an account, we’ll create a "droplet". This isn't water in th
 it's just a cloud server :) After logging into your account, on the top go to Create -> Droplets.
 
 
-![/img/https/droplet-create.png](/expfactory/img/https/droplet-create.png)
+![/img/https/droplet-create.png](/img/https/droplet-create.png)
 
 On the next screen you can choose options for your droplet.  First, select an image / distribution. We’ll use **Ubuntu 16.04.4 x64** 
 
-![/img/https/droplet-choose.png](/expfactory/img/https/droplet-choose.png)
+![/img/https/droplet-choose.png](/img/https/droplet-choose.png)
 
 
 Next, choose a droplet size. Since expfactory is really just a fancy way of serving up webpages, it doesn’t use very much memory, CPU, or hard-disk space. So we’ll use the smallest capacity server, **1GB / 1vCPU / 25GB / 1TB / $0.007/hr**. You can of course change this
 if you find the needs of your server change.
 
-![/img/https/droplet-size.png](/expfactory/img/https/droplet-size.png)
+![/img/https/droplet-size.png](/img/https/droplet-size.png)
 
 
 Skip the sections to "Add backups" and "Add block storage", and go to "Choose a datacenter region." Usually you will want to pick a region closest to where your users will be, but you might have other reasons for picking a region (e.g., to comply with data privacy regulations).

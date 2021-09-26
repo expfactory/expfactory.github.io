@@ -1,5 +1,4 @@
 ---
-layout: default
 title: LabJS Integration
 pdf: true
 permalink: /integration-labjs

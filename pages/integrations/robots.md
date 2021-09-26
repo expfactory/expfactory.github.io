@@ -1,5 +1,4 @@
 ---
-layout: default
 title: Experiment Factory Robots
 pdf: true
 permalink: /integration-robots

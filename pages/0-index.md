@@ -1,13 +1,10 @@
 ---
-layout: default
 title: The Experiment Factory
 pdf: true
 permalink: /
 ---
 
-<div style="float:right; margin-bottom:50px; color:#666">
-Version: {{ site.version }}<br>
-</div>
+# The Experiment Factory
 
 <div>
     <img src="img/expfactoryticketyellow.png" style="float:left">
@@ -19,7 +16,7 @@ Version: {{ site.version }}<br>
 The Experiment Factory software will help you create a reproducible container to deploy behavioral experiments. Want to jump right in? Choose one of our demo containers, and browse to localhost:</p>
 
 
-```
+```bash
 docker run -p 80:80 vanessa/expfactory-games start
 docker run -p 80:80 vanessa/expfactory-surveys start
 docker run -p 80:80 vanessa/expfactory-experiments start

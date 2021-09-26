@@ -1,5 +1,4 @@
 ---
-layout: default
 title: Developing an Experiment
 pdf: true
 permalink: /development

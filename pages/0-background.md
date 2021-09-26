@@ -1,12 +1,10 @@
 ---
-layout: default
 title: Background
-pdf: true
 permalink: /background
-toc: false
 ---
 
 # Background
+
 Behavioral research can be challenging because of software dependencies. For example, if I have a stroop task that needs a web browser and a set of system libraries to run, if I were to try and share that task with a colleague that does not have that software on his computer, it might not work. This is a huge problem for validating scientific claims that are founded on these experiments, because it means that the work cannot be reproduced. It becomes even more challenging when we need to consider things like storage of data, and how to easily generate customized experiments.
 
 This set of tools, software called "The Experiment Factory" was made for this purpose. A user interested in deploying a behavioral assessment can simply select a grouping of paradigms from the web interface, and build a container to serve them. Once the particular set of paradigms is generated, it (along with dependencies and important settings) are carried forward with the container.

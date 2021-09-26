@@ -1,14 +1,12 @@
 ---
-layout: default
 title: Customize your Experiment Container
 pdf: true
 permalink: /customize
-toc: true
 ---
 
 # Custom Configuration
 
-> Note that these pages describe variables to customize the experiment container. See [participant variables](https://expfactory.github.io/usage#participant-variables) for customizing experiments.
+> Note that these pages describe variables to customize the experiment container. See [participant variables]({{ site.baseurl }}/usage#participant-variables) for customizing experiments.
 
 You have probably just reviewed the basics of [generation of a container](/generate) and now are ready to customize it. For example, if you want more specificity to configure your container, you might want to customize the database or experiment variables. There are **two** kinds of customization, the customization that happens **before** you build the container (for example, the experiments you choose to install, period, and any defaults you want set for running them) and the customization that happens at runtime (meaning defining the database type when you start the container).
 
@@ -24,7 +22,7 @@ When you run a build with `quay.io/vanessa/expfactory-builder` image, there are 
 ### database
 We recommend that you generate your container using the default "filesystem" database, and customize the database at runtime. A **filesystem** database is flat files, meaning that results are written to a mapped folder on the local machine, and each participant has their own results folder. This option is provided as many labs are accustomed to providing a battery locally, and want to save output directly to the filesystem without having any expertise with setting up a database. This argument doesn't need to be specified, and would coincide with:
 
-```
+```bash
 docker run -v /tmp/my-experiment:/data \
               quay.io/vanessa/expfactory-builder \
               build --database filesystem \
@@ -36,7 +34,7 @@ Your other options are **sqlite**, **mysql**, and **postgres** all of which we r
 ### randomize
 By default, experiments will be selected in random order, and it's recommended to keep this. The other option will use the ordering of experiments as you've selected them. If you want a manually set order, then after you use the `expfactory-builder`, edit your Dockerfile by adding the following environment variable:
 
-```
+```dockerfile
 ENV EXPFACTORY_RANDOM true
 ```
 
@@ -47,7 +45,7 @@ This variable can be easily changed at runtime via a checkbox, so it's not hugel
 
 The Experiment Factory will generate a new unique ID for each participant with some study idenitifier prefix. The default is `expfactory`, meaning that my participants will be given identifiers `expfactory/0` through `expfactory/n`, and for a filesystem database, it will produce output files according to that schema:
 
-```
+```bash
  /scif/data/
       expfactory/
            00000/
@@ -56,7 +54,7 @@ The Experiment Factory will generate a new unique ID for each participant with s
 
 To ask for a different study id:
 
-```
+```bash
 docker run -v /tmp/my-experiment:/data \
               quay.io/vanessa/expfactory-builder \
               build --studyid dns \

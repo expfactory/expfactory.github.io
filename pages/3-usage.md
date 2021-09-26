@@ -1,14 +1,12 @@
 ---
-layout: default
 title: Usage
 pdf: true
 permalink: /usage
 ---
 
 # Usage
-If you've just finished [generating your experiments container](/generate) (whether a custom build or pull of an already existing container) then you are ready to use it! These sections will discuss runtime variables, along with settings like experiment order and database type.
 
-{% include toc.html %}
+If you've just finished [generating your experiments container](/generate) (whether a custom build or pull of an already existing container) then you are ready to use it! These sections will discuss runtime variables, along with settings like experiment order and database type.
 
 ## Summary of Variables
 
@@ -34,7 +32,7 @@ The first thing you should do is start the container. The variables listed above
 ### Save Data to the Host
 It's most likely the case that your container's default is to save data to the file system, and use a study id of expfactory. This coincides to running with no extra arguments, but perhaps mapping the data folder:
 
-```
+```bash
 docker run -v /tmp/my-experiment/data/:/scif/data \
            -d -p 80:80 \
            expfactory/experiments start
@@ -43,7 +41,7 @@ docker run -v /tmp/my-experiment/data/:/scif/data \
 ### Custom Databases
 Here is how you would specify a different studyid. The study id is only used for a folder name (in the case of a fileystem save) or an sqlite database name (for sqlite3 database):
 
-```
+```bash
 docker run -v /tmp/my-experiment/data/:/scif/data \
            -d -p 80:80 \
            expfactory/experiments  --studyid dns start
@@ -51,7 +49,7 @@ docker run -v /tmp/my-experiment/data/:/scif/data \
 
 Here is how to specify a different database, like sqlite
 
-```
+```bash
 docker run -v /tmp/my-experiment/data/:/scif/data \
            -d -p 80:80 \
            expfactory/experiments  --database sqlite start
@@ -60,7 +58,7 @@ docker run -v /tmp/my-experiment/data/:/scif/data \
 ### Custom Experiment Set
 Here is how to limit the experiments exposed in the portal. For example, you may have 30 installed in the container, but only want to reveal 3 for a session:
 
-```
+```bash
 docker run -v /tmp/my-experiment/data/:/scif/data \
            -d -p 80:80 \
            expfactory/experiments  --experiments test-test,tower-of-london start
@@ -69,7 +67,7 @@ docker run -v /tmp/my-experiment/data/:/scif/data \
 ### Participant Variables
 When you start your container, you will have the option to provide a comma separated file (csv) of subject identifiers and experiment variables. These variables will simply be passed to the relevant experiments that are specified in the file given that a particular participant token is running. The variables are not rendered or otherwise checked in any way before being passed to the experiment (spaces and capitalization matters, and the experiment is required to do any extra parsing needed in the Javascript). The server does not do any kind of custom parsing or checks for them. Let's look at an example file to better understand this. The format of the file should be flat and tab delimited (default) with fields for an experiment id (`exp_id`), variable name and values (`var_name`, `var_values`) and then a token assigned to each:
 
-```
+```csv
 exp_id,var_name,var_value,token
 test-parse-url,globalname,globalvalue,*
 test-parse-url,color,red,123
@@ -113,7 +111,7 @@ appropriately. Since the data file is loaded at start of the container and you w
 A complete example of this is provided in the [test-parse-url repository](https://github.com/expfactory-experiments/test-parse-url/tree/master/docker)
 and the commands are briefly summarized below.
 
-```
+```bash
 # Pull the example container with the url experiment (or create your own!)
 docker pull vanessa/test-parse-url:v3.1 .
 
@@ -133,7 +131,7 @@ exec d8c612e0dfa2 expfactory users --list
 
 Here is the new data variables file:
 
-```
+```csv
 exp_id,var_name,var_value,token
 test-parse-url,globalname,globalvalue,*
 test-parse-url,color,red,017305e8-7eba-4d43-bc81-e95f5ceab0a8
@@ -144,7 +142,7 @@ test-parse-url,words,omg tacos,275ae6ea-5d33-499e-a3db-2bbcc4881ff4
 
 Stop the container and verify the filesystem database persists on the host.
 
-```
+```bash
 $  ls expfactory/
 017305e8-7eba-4d43-bc81-e95f5ceab0a8  275ae6ea-5d33-499e-a3db-2bbcc4881ff4  a737a811-1bcc-449c-b0b0-9acded60bbd9
 ```
@@ -152,7 +150,7 @@ $  ls expfactory/
 Run the container again, this time specifying the variables file with `--vars`. Since we are using a filesystem database we don't need to start
 the exact same container, but you could if you wanted to. You can also change the delimiter with `--delim`. 
 
-```
+```bash
 docker run -d -v $PWD:/scif/data -p 80:80 vanessa/test-parse-url --vars /scif/data/variables.csv --headless start
 ```
 
@@ -169,7 +167,7 @@ For a complete tutorial of the above, see the [test-parse-url repository](https:
 
 First we can start the container (notice that we are giving it a name to easily reference it by) with `--headless` mode.
 
-```
+```bash
 docker run -p 80:80 -d --name experiments -v /tmp/data:/scif/data <container> --headless start
 4f6826329e9e366c4d2fb56d64956f599861d1f0439d39d7bcacece3e88c7473
 ```
@@ -182,7 +180,7 @@ If we go to the portal at [127.0.0.1](http://127.0.0.1) we will see a different 
 
 You can also start and specify to not randomize, and present experiments in a particular order:
 
-```
+```bash
 docker run -p 80:80 -d --name experiments -v /tmp/data:/scif/data <container> \
                     --headless --no-randomize \
                     --experiments test-task,tower-of-london start
@@ -195,7 +193,7 @@ If you ask for non random order without giving a list, you will present the expe
 A "token" is basically a subject id that is intended to be used once, and can be sent securely to your participants to access the experiments. The token can be refreshed, revoked, or active. You will need to generate them, and briefly it looks like this:
 
 
-```
+```bash
 docker exec experiments expfactory users --help
 docker exec experiments expfactory users --new 3
 ```
@@ -237,7 +235,7 @@ When the user finishes the protocol, the user will have the token revoked so an 
 ### Pre-set Experiments
 For a headless experiment, you don't have the web interface to filter experiments in advance, or as for random (or not random) ordering. By default, not giving the `--experiments` argument will serve all experiments found installed in the container. If you want to limit to a smaller subset, do that with the experiments argument:
 
-```
+```bash
 docker run -p 80:80 -d \
            --name experiments \ 
            -v /tmp/data:/scif/data <container> --experiments tower-of-london,test-task --headless start
@@ -246,7 +244,7 @@ docker run -p 80:80 -d \
 and if you want the order typed to be maintained (and not random) add the `--no-randomize` flag.
 
 
-```
+```bash
 docker run -p 80:80 -d \
            --name experiments \ 
            -v /tmp/data:/scif/data <container> --experiments tower-of-london,test-task --headless --no-randomize start
@@ -256,7 +254,7 @@ docker run -p 80:80 -d \
 
 The `expfactory` tool in the container will let you view (or keep open) the experiment logs. You can do this by issuing a command to a running container:
 
-```
+```bash
 $ docker exec angry_blackwell expfactory logs
 New session [subid] expfactory/f57bd534-fa50-4af5-9114-d0fb769c5de4
 [router] None --> bis11-survey for [subid] expfactory/f57bd534-fa50-4af5-9114-d0fb769c5de4 [username] You
@@ -272,7 +270,7 @@ Expfactory Version: 3.0
 
 if you want the window to remain open to watch, just add `--tail`
 
-```
+```bash
 $ docker exec angry_blackwell expfactory logs --tail
 ```
 You can equally shell into the contaniner and run `expfactory logs` directly.
@@ -305,7 +303,7 @@ If you are running an experiment in a lab and can expect the user to not return 
 ### User Management Help
 The main entrypoint for managing users is with `expfactory users`:
 
-```
+```bash
 expfactory users --help
 usage: expfactory users [-h] [--new NEW] [--list] [--revoke REVOKE]
                         [--refresh REFRESH] [--restart RESTART]
@@ -326,7 +324,7 @@ optional arguments:
 ### New Users
 As shown previously, we can use `exec` to execute a command to the container to create new users:
 
-```
+```bash
 docker exec experiments expfactory users --new 3
 DATABASE	TOKEN
 /scif/data/expfactory/41a451cc-7416-4fab-9247-59b1d65e33a2	41a451cc-7416-4fab-9247-59b1d65e33a2[active]
@@ -341,20 +339,20 @@ The result here will depend on the database type.
 
 You can copy paste this output from the terminal, or pipe into a file instead:
 
-```
+```bash
 docker exec experiments expfactory users --new 3 >> participants.tsv
 ```
 
 You can also issue these commands by shelling inside the container, which we will do for the remainder of the examples:
 
-```
+```bash
 docker exec -it experiments bash
 ```
 
 ### List Users
 If you ever need to list the tokens you've generated, you can use the `users --list` command. Be careful that the environment variable `EXPFACTORY_DATABASE` is set to be the one that you intend. For example, a filesystem database setting will print all folders found in the mapped folder given this variable is set to `filesystem`. In the example below, we list users saved as folders on the filesystem:
 
-```
+```bash
  expfactory users --list
 DATABASE	TOKEN
 /scif/data/expfactory/41a451cc-7416-4fab-9247-59b1d65e33a2	41a451cc-7416-4fab-9247-59b1d65e33a2[active]
@@ -364,13 +362,13 @@ DATABASE	TOKEN
 
 This would be equivalent to the following below. This is the suggested usage because a single container can be flexible to have multiple different kinds of databases:
 
-```
+```bash
  expfactory users --list --database filesystem
 ```
 
 If we were to list a relational database, we would see the database index in the `DATABASE` column instead:
 
-```
+```bash
 expfactory users --list --database sqlite
 DATABASE	TOKEN
 6	a2d266f7-52a5-497b-9b85-1e98febef6dc[active]
@@ -380,7 +378,7 @@ DATABASE	TOKEN
 
 We generally recommend for you to specify the `--database` argument unless you are using the database defined to be the container default, determinde by `EXPFACTORY_DATABASE` in it's build recipe (the Dockerfile). You can always check the default in a running image (`foo`) like this:
 
-```
+```bash
 docker inspect foo | grep EXPFACTORY_DATABASE
                 "EXPFACTORY_DATABASE=filesystem",
 ```
@@ -391,7 +389,7 @@ docker inspect foo | grep EXPFACTORY_DATABASE
 ### Restart User
 If a user finishes and you want to restart, you have two options. You can either issue a new identifier (this preserves previous data, and you will still need to keep track of both identifiers):
 
-```
+```bash
 expfactory users --new 1
 DATABASE	TOKEN
 /scif/data/expfactory/1753bfb5-a230-472c-aa04-ecdc118c1922	1753bfb5-a230-472c-aa04-ecdc118c1922[active]
@@ -400,7 +398,7 @@ DATABASE	TOKEN
 or you can restart the user, meaning that any status of `finished` or `revoked` is cleared, and the participant can again write (or over-write) data to his or her folder. You would need to restart a user if you intend to refresh a token. Here we show the folder with list before and after a restart:
 
 
-```
+```bash
 $ expfactory users --list
 /scif/data/expfactory/04a144da-97f5-4734-b5ea-1658aa2170ce_finished	04a144da-97f5-4734-b5ea-1658aa2170ce[finished]
 
@@ -413,14 +411,14 @@ $ expfactory users --list
 
 You can also change your mind and put the user back in `finished` status:
 
-```
+```bash
 $ expfactory users --finish 04a144da-97f5-4734-b5ea-1658aa2170ce
 [finishing] 04a144da-97f5-4734-b5ea-1658aa2170ce --> /scif/data/expfactory/04a144da-97f5-4734-b5ea-1658aa2170ce_finished
 ```
 
 or revoke the token entirely, which is akin to a finish, but implies a different status.
 
-```
+```bash
 $ expfactory users --revoke 04a144da-97f5-4734-b5ea-1658aa2170ce
 [revoking] 04a144da-97f5-4734-b5ea-1658aa2170ce --> /scif/data/expfactory/04a144da-97f5-4734-b5ea-1658aa2170ce_revoked
 
@@ -431,7 +429,7 @@ $ expfactory users --list
 ### Refresh User Token
 A refresh means issuing a completely new token, and this is only possible for status `[active]`. You should be careful with this because the folder is renamed (for filesystem) commands. If you have a finished or revoked folder and want to refresh a user token, you need to restart first. Here is what it looks like to refresh an active user token:
 
-```
+```bash
 expfactory users --refresh 1320a84f-2e70-456d-91dc-083d36c68e17
 [refreshing] 1320a84f-2e70-456d-91dc-083d36c68e17 --> /scif/data/expfactory/fecad5cd-b044-4b1a-8fd1-37aafdbf8ed7
 ```
@@ -449,7 +447,7 @@ Whether you choose a headless or interactive start, in both cases you can choose
 ### filesystem
 Saving to the filesytem is the default (what you get when you don't specify a particular database) and means saving to a folder called `/scif/data` in the Docker image. If you are saving data to the filesystem (`filesystem` database), given that you've mounted the container data folder `/scif/data` to the host, this means that the data will be found on the host in that location. In the example below, we have mounted `/tmp/data` to `/scif/data` in the container, and we are running interactive experiments (meaning without pre-generated tokens for login):
 
-```
+```bash
 $ tree /tmp/data/expfactory/xxxx-xxxx-xxxx/
 
     /tmp/data/expfactory/xxxx-xxxx-xxxx/
@@ -460,7 +458,7 @@ $ tree /tmp/data/expfactory/xxxx-xxxx-xxxx/
 
 If we had changed our studyid to something else (e.g., `dns`), we might see:
 
-```
+```bash
 $ tree /tmp/data/dns/xxxx-xxxx-xxxx/
 
     /tmp/data/dns/xxxx-xxxx-xxxx/
@@ -480,7 +478,7 @@ For detailed information about how to read json strings (whether from file or da
 ### sqlite
 An sqlite database can be used instead of a flat filesytem. This will produce one file that you can move around and read with any standard scientific software (python, R) with functions to talk to sqlite databases. If you want to start your container and use sqlite3, then specify:
 
-```
+```bash
 docker run -p 80:80 expfactory/experiments \
            --database sqlite \
            start
@@ -488,7 +486,7 @@ docker run -p 80:80 expfactory/experiments \
 
 If you just specify `sqlite` the file will save to a default at `/scif/data/<studyid>.db` You can also specify a custom database uri that starts with sqlite, like `sqlite:////tmp/database.db` that will be generated in the container (and you can optionally map to the host). For example, here is my sqlite3 database under `/scif/data`, from within the container:
 
-```
+```bash
 ls /scif/data
     expfactory.db
 ```
@@ -496,7 +494,7 @@ ls /scif/data
 #### How do I read it?
 You can generally use any scientific programming software that has libraries for interacting with sqlite3 databases. My preference is for the [sqlite3](http://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/) library, and we might read the file like this (in python):
 
-```
+```python
 import sqlite3
 conn = sqlite3.connect('/scif/data/expfactory.db')
 
@@ -510,7 +508,7 @@ for row in results:
 
 Each result row includes the table row id, the date, result content, and participant id.
 
-```
+```python
 >>> row[0]  # table result row index
 1
 
@@ -547,7 +545,7 @@ Since the Participant table doesn't hold anything beyond the participant id, you
 ### mysql
 For labs that wish to deploy the container on a server, you are encouraged to use a more substantial database, such as a traditional relational database like MySQL or Postgres. In all of these cases, you need to specify the full database url. For mysql, we also specify using a particular driver called `pymysql`. For example:
 
-```
+```bash
 # mysql
 docker run -p 80:80 expfactory/experiments \
            --database  mysql+pymysql://username:password@host/dbname", \
@@ -560,7 +558,7 @@ docker run -p 80:80 vanessa/experiment \
 
 As an example, let's use a throw away Docker mysql container. We will start it first. You should either use an external database, or a more substantial deployment like Docker=compose, etc.
 
-```
+```bash
 docker run --detach --name=expfactory-mysql --env="MYSQL_ROOT_PASSWORD=expfactory" \
                                             --env="MYSQL_DATABASE=db" \
                                             --env="MYSQL_USER=expfactory" \
@@ -570,7 +568,7 @@ docker run --detach --name=expfactory-mysql --env="MYSQL_ROOT_PASSWORD=expfactor
 
 Note that if you ran the container -with `--publish 6603:3306` it would be mapped to your host (localhost) making it accessible to the outside world.  You should be able to see it with `docker ps`:
 
-```
+```bash
 $ docker ps
 CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                          NAMES
 47f9d56f1b3f        mysql                "docker-entrypoint..."   2 minutes ago       Up 2 minutes        3306/tcp                       expfactory-mysql
@@ -578,14 +576,14 @@ CONTAINER ID        IMAGE                COMMAND                  CREATED       
 
 and inspect it to get the IPAddress
 
-```
+```bash
 $ docker inspect expfactory-mysql | grep '"IPAddress"'
             "IPAddress": "172.17.0.2",
 ```
 
 This is good! We now have the address to give to our Expfactory container.
 
-```
+```bash
 docker run -p 80:80 expfactory/experiments \
            --database "mysql+pymysql://expfactory:expfactory@172.17.0.2/db" \
            start
@@ -594,7 +592,7 @@ docker run -p 80:80 expfactory/experiments \
 In the example above, the username is `expfactory`, the password is `expfactory`, the host is `172.17.0.2` that we inspected above, and the database name is `db`. You can now open the browser to do an experiment, and then (again) use python to inspect results. I like pymysql because it seems to work in Python 3:
 
 
-```
+```python
 import pymysql
 conn = pymysql.connect(host='172.17.0.2',
                        user='expfactory',
@@ -614,13 +612,13 @@ finally:
 
 and the above will print a nice dump of the test task that we just took!
 
-```
+```json
 {'date': datetime.datetime(2017, 11, 19, 16, 28, 50), 'exp_id': 'test-task', 'data': '[{"rt":821,"stimulus":"<div class = \\"shapebox\\"><div id = \\"cross\\"></div></div>","key_press":32,"possible_responses":[32],"stim_duration":2000,"block_duration":2000,"timing_post_trial":100,"trial_id":"test","trial_type":"poldrack-single-stim","trial_index":0,"time_elapsed":2004,"internal_node_id":"0.0-0.0","addingOnTrial":"added!","exp_id":"test-task","full_screen":true,"focus_shifts":0},{"rt":400,"stimulus":"<div class = \\"shapebox\\"><div id = \\"cross\\"></div></div>","key_press":32,"possible_responses":[32],"stim_duration":2000,"block_duration":2000,"timing_post_trial":100,"trial_id":"test","trial_type":"poldrack-single-stim","trial_index":1,"time_elapsed":4108,"internal_node_id":"0.0-1.0","addingOnTrial":"added!","exp_id":"test-task","full_screen":false,"focus_shifts":0},{"rt":324,"stimulus":"<div class = \\"shapebox\\"><div id = \\"cross\\"></div></div>","key_press":32,"possible_responses":[32],"stim_duration":2000,"block_duration":2000,"timing_post_trial":100,"trial_id":"test","trial_type":"poldrack-single-stim","trial_index":2,"time_elapsed":6209,"internal_node_id":"0.0-2.0","addingOnTrial":"added!","exp_id":"test-task","full_screen":false,"focus_shifts":0,"added_Data?":"success!"},{"trial_type":"call-function","trial_index":3,"time_elapsed":6310,"internal_node_id":"0.0-3.0","exp_id":"test-task","full_screen":false,"focus_shifts":0},{"rt":4491,"responses":"{\\"Q0\\":\\"jhjkh\\",\\"Q1\\":\\"\\"}","trial_id":"post task questions","trial_type":"survey-text","trial_index":4,"time_elapsed":10805,"internal_node_id":"0.0-5.0","exp_id":"test-task","full_screen":false,"focus_shifts":0},{"text":"<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>","rt":1413,"key_press":13,"block_duration":1413,"timing_post_trial":0,"trial_id":"end","exp_id":"test-task","trial_type":"poldrack-text","trial_index":5,"time_elapsed":13219,"internal_node_id":"0.0-6.0","credit_var":true,"performance_var":600,"full_screen":false,"focus_shifts":0}]', 'id': 1, 'participant_id': 1}
 ```
 
 Don't forget to stop your image (control+c if it's hanging, or `docker stop <containerid>` if detached, and then remove the mysql container after that.
 
-```
+```bash
 docker stop expfactory-mysql
 docker rm expfactory-mysql
 ```
@@ -630,7 +628,7 @@ Note that this is only an example, we recommend that you get proper hosting (for
 ### postgres
 We can do similar to the above, but use postgres instead. First we will start a second container:
 
-```
+```bash
 docker run --name expfactory-postgres --env POSTGRES_PASSWORD=expfactory \
                                       --env POSTGRES_USER=expfactory  \
                                       --env POSTGRES_DB=db \
@@ -639,7 +637,7 @@ docker run --name expfactory-postgres --env POSTGRES_PASSWORD=expfactory \
 
 Ensure that our container is running with `docker ps`
 
-```
+```bash
 docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
 bb748a75bd91        postgres            "docker-entrypoint..."   2 seconds ago       Up 1 second         5432/tcp            expfactory-postgres
@@ -649,14 +647,14 @@ and of course get the IPAddress
 
 
 
-```
+```bash
 $ docker inspect expfactory-postgres | grep '"IPAddress"'
             "IPAddress": "172.17.0.2",
 ```
 
 Now we can again form our complete database url to give to the experiment factory container to connect to:
 
-```
+```bash
 # postgres
 docker run -p 80:80 vanessa/experiment \
            --database "postgres://expfactory:expfactory@172.17.0.2/db" \
@@ -664,13 +662,13 @@ docker run -p 80:80 vanessa/experiment \
 ```
 If you leave it hanging in the screen (note no -d for detached above) you will see this before the gunicorn log:
 
-```
+```bash
 Database set as postgres://expfactory:expfactory@172.17.0.2/db
 ```
 
 Now let's again do the test task, and start up python on our local machine to see if we have results!
 
-```
+```python
 import psycopg2
 db = "host='172.17.0.2' dbname='db' user='expfactory' password='expfactory'"
 conn = psycopg2.connect(db)
@@ -680,7 +678,7 @@ result = cursor.fetchall()
 ```
 And here is our row, a list with 5 indices.
 
-```
+```json
 [(1,
   datetime.datetime(2017, 11, 19, 16, 48, 51, 957224),
   '[{"rt":1294,"stimulus":"<div class = \\"shapebox\\"><div id = \\"cross\\"></div></div>","key_press":32,"possible_responses":[32],"stim_duration":2000,"block_duration":2000,"timing_post_trial":100,"trial_id":"test","trial_type":"poldrack-single-stim","trial_index":0,"time_elapsed":2005,"internal_node_id":"0.0-0.0","addingOnTrial":"added!","exp_id":"test-task","full_screen":false,"focus_shifts":0},{"rt":163,"stimulus":"<div class = \\"shapebox\\"><div id = \\"cross\\"></div></div>","key_press":32,"possible_responses":[32],"stim_duration":2000,"block_duration":2000,"timing_post_trial":100,"trial_id":"test","trial_type":"poldrack-single-stim","trial_index":1,"time_elapsed":4107,"internal_node_id":"0.0-1.0","addingOnTrial":"added!","exp_id":"test-task","full_screen":false,"focus_shifts":0},{"rt":324,"stimulus":"<div class = \\"shapebox\\"><div id = \\"cross\\"></div></div>","key_press":32,"possible_responses":[32],"stim_duration":2000,"block_duration":2000,"timing_post_trial":100,"trial_id":"test","trial_type":"poldrack-single-stim","trial_index":2,"time_elapsed":6208,"internal_node_id":"0.0-2.0","addingOnTrial":"added!","exp_id":"test-task","full_screen":false,"focus_shifts":0,"added_Data?":"success!"},{"trial_type":"call-function","trial_index":3,"time_elapsed":6309,"internal_node_id":"0.0-3.0","exp_id":"test-task","full_screen":false,"focus_shifts":0},{"rt":6904,"responses":"{\\"Q0\\":\\"bloop\\",\\"Q1\\":\\"debloop\\"}","trial_id":"post task questions","trial_type":"survey-text","trial_index":4,"time_elapsed":13217,"internal_node_id":"0.0-5.0","exp_id":"test-task","full_screen":false,"focus_shifts":0},{"text":"<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>","rt":916,"key_press":13,"block_duration":916,"timing_post_trial":0,"trial_id":"end","exp_id":"test-task","trial_type":"poldrack-text","trial_index":5,"time_elapsed":15135,"internal_node_id":"0.0-6.0","credit_var":true,"performance_var":676,"full_screen":false,"focus_shifts":0}]',
@@ -696,7 +694,7 @@ And here is our row, a list with 5 indices.
 
 Again, you should consider a robust and secure setup when running this in production. For the example, don't forget to shut down your database after the image.
 
-```
+```bash
 docker stop expfactory-postgres
 docker rm expfactory-postgres
 ```
@@ -712,7 +710,7 @@ Here we assume that you have chosen some database and that your container is run
 
 Not mapping a folder to /scif/data assumes that either we don't want to see files on the host, **or** if the image default is to save to a relational database external to the experiments container itself, we access data by querying this separate endpoint. For a filesystem or sqlite database, since the file is stored inside the container and we want access to it, we likely started with the location mapped:
 
-```
+```bash
 docker run -p 80:80 -v /tmp/data:/scif/data vanessa/expfactory-experiments start
 ```
 
@@ -812,20 +810,20 @@ dict_keys(['data'])
 You are probably expecting another dictionary object under data. However, we can't be sure that every experiment will want to save data in JSON. For this reason, the key under `data` is actually a string:
 
 
-```
+```python
 type(content['data'])
 str
 ```
 
 And since we know jspsych saves json, it's fairly easy to load the string to get the final dictionary:
 
-```
+```python
 result = json.loads(content['data'])
 ```
 
 Now our result is a list, each a json object for one timepoint in the experiment:
 
-```
+```python
 result[0]
 {'focus_shifts': 0,
  'internal_node_id': '0.0-0.0-0.0',
@@ -844,7 +842,7 @@ result[0]
 
 My preference is to parse the result like this, but if you prefer data frames, one trick I like to do is to use [pandas](https://pandas.pydata.org/) to easily turn a list of (one level) dictionary into a dataframe, and then you can save to tab delimited file (.tsv).
 
-```
+```python
 import pandas
 
 df = pandas.DataFrame.from_dict(result)

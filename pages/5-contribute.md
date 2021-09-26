@@ -1,17 +1,19 @@
 ---
-layout: default
 title: Contribute an Experiment
 pdf: true
 permalink: /contribute
 ---
 
-# Contribute a Container
+# Contribute
+
+## Contribute a Container
+
 This guide is intended for when you have a finished experiment and want to contribute it to the library. For
 steps on how to develop the experiment in the container environment itself, see our [developer's guide](/development)
 
 If you've finished your container and want to add it to the [recipes page](https://expfactory.github.io/experiments/recipes) for others to find and use, then you simply need to add an entry to the [containers file](https://github.com/expfactory/experiments/blob/master/docs/_data/containers.yml) to provide a name, link, and container base. You can do this via a pull request (meaning you would fork the repository, clone your fork, make changes, commit, and then file a pull request against the main repository) or simply [file an issue](https://github.com/expfactory/experiments/issues) with the following fields and the container will be added for you.
 
-```
+```yaml
 - name: expfactory-games
   base: "docker"
   url: "https://hub.docker.com/r/vanessa/expfactory-games/"
@@ -27,16 +29,16 @@ If you've finished your container and want to add it to the [recipes page](https
 
 The idea here is that you can find others with similar work to your own, and collaborate.
 
-# Contribute an Experiment
+## Contribute an Experiment
 
 This guide will walk you through contribution of an experiment. We are still developing these steps, and there may be small changes as we do. 
 
-## Prerequisites
+### Prerequisites
 
-### Developer Pre-reqs
+#### Developer Pre-reqs
 You should understand basic html and css (or another web syntax of your choice) and how to create some form of web application that collects data and then can submit via a POST. If you are developing a web experiment, you should also understand how to bring up a basic web server to test your experiment. This is a very different approach from the first version of the Experiment Factory that expected a predictable template, and performed generation of an experiment behind the scenes. If you don't have all this knowledge, it's ok! Just [post an issue on our board](https://github.com/expfactory/expfactory/issues) and we will help. It's both fun to learn, and fun to participate in open source development.
 
-### Experiment Pre-reqs
+#### Experiment Pre-reqs
 The most basic experiment contribution could be a web form, an intermediate contribution might be using a tool like jspsych to generate an experiment, and a more substantial contribution would use some web framework that requires "compiling" a final application (e.g., nodejs). Minimally, your final experiment must meet the following criteria:
 
  - **all dependencies can be included in a folder**: While content delivery networks (CDNs) are great for obtaining resources, you can be more assured of having a file if you download it locally.
@@ -46,7 +48,7 @@ The most basic experiment contribution could be a web form, an intermediate cont
  - **experiment completion** should have a POST of json data (`{"data": data}`) to `/save`. If successful, it navigates to `/next`. If not successful, data should be saved locally in the format of your choice (for preview and testing purposes). The server will by default look for the post to have a `data` field and use it. If not found, it will use the entire `POST`.
 
 
-# The general steps
+#### The general steps
 The general steps are the following:
 
  1. create an experiment repository
@@ -57,7 +59,7 @@ The general steps are the following:
 
 Each of these steps is outlined in detail below.
 
-## The experiment repository
+##### The experiment repository
 You will want to first make an experiment repository. The repository should contain all required files (css style sheets, javascript, and other image and media) that are required to run your experiment. To get an idea of what your repository will end up containing, have a look at the [test task](https://github.com/expfactory-experiments/test-task), which is an experiment built with [jsPsych](https://www.jspsych.org/).  If you've never used Github before, it's ok! There are plenty of [guides available](https://guides.github.com/activities/hello-world/) to learn, and this is a good time to start. So you will want to:
 
  - if you don't have one, create a Github account
@@ -80,7 +82,7 @@ It's also helpful to copy paste this address and add it to the main repository d
 
 Now let's pretend we created our Github remote, and have our experiment in our local repository (a folder on your machine with the `.git` hidden directory). We need to bring up a web server, and open our browser to the port we are using to see our experiment. The easiest way to bring up a server is by using python. If you cd into the folder and run:
 
-```
+```bash
 cd my-experiment/
 
 python -m http.server 9999         # python 3
@@ -106,10 +108,10 @@ I could then change the paths, and refresh the page, and see the experiment!
 
 Note that you don't need to restart the python web server to see changes, you can just refresh the page. This is the beauty of statically served content!
 
-## The experiment config
+##### The experiment config
 Great! Once you are here, you have a folder with a working experiment. This is no small task! In order to make your experiment programatically accessible, we require a configuration file, a `config.json` file that lives in the root of the experiment repository. A `config.json` should look like the following:
 
-```
+```json
 {
     "name": "Test Task",
     "exp_id": "test-task",
@@ -146,7 +148,7 @@ Great! Once you are here, you have a folder with a working experiment. This is n
 You can add whatever metadata you want to the config.json, and you can also add labels to the container to be programatically accessible (more later on this). You should not keep a version in this metadata file, but instead use Github tags and commits. This information will be added automatically upon build of your experiment container. We also **strongly** encourate you to add a LICENSE file to your work.
 
 
-## Test the Experiment
+##### Test the Experiment
 Your experiment will be tested when you submit a pull request (as we just showed above). However you can run the tests before filing the PR. There are three kinds of tests, testing an **experiment** testing a **contribution**, and testing an **install**. You likely want to do the first and second, minimally, and ideally the third:
 
  - an **experiment** is a single folder with static content to serve an experiment. Usually
@@ -162,20 +164,20 @@ Note that bases for expfactory were initially provided on [Docker Hub](https://h
 ### Test an Experiment
 Testing an experiment primarily means two things: some kind of static testing for content, and a runtime test that the experiment functions as we would expect.
 
-### Runtime Test
+#### Runtime Test
 When you submit an experiment for review, given that the repository for the experiment is also hosting it on the Github pages associated with the repository, it's likely easy enough for you and your reviewers to test the experiment using Github pages. However, for predictable experiment layouts (e.g., jspsych) we have developed a set of [Experiment Robots](/integrations.html#expfactory-robots) that you can use for hands off interactive testing.
 
-### Static Testing
+#### Static Testing
 You have two options to test experiments on your host using `quay.io/vanessa/expfactory-builder`. If you want to test a single experiment, meaning a folder with a `config.json` file:
 
-```
+```bash
 my-experiment/
     config.json
 ```
 
 then you should bind directory to it like this:
 
-```
+```bash
 docker run -v my-experiment:/scif/apps quay.io/vanessa/expfactory-builder test
 Testing experiments mounted to /scif/apps
 ....Test: Experiment Validation
@@ -188,7 +190,7 @@ OK
 
 If you want to test a group of experiments (a folder with subfolders, where each subfolder has a `config.json`):
 
-```
+```bash
 experiments/
     experiment-1/
         config.json
@@ -201,7 +203,7 @@ experiments/
 
 then you can bind the the main top level folder like this:
 
-```
+```bash
 docker run -v experiments:/scif/apps quay.io/vanessa/expfactory-builder test
 Testing experiments mounted to /scif/apps
 .
@@ -238,7 +240,6 @@ You need to bind the folder with markdown files for the library to `/scif/data` 
 docker run -v $PWD/_library:/scif/data quay.io/vanessa/expfactory-builder test-library
 ```
 
-
 ### Test an Installation
 Testing an installation is likely the most important, and final step. We mimic the same steps of generating a "full fledged" container to remain consistent. You will want to generate a base container, and install your experiment to it. We can use the builder to generate our recipe as we did before. It's good practice to include the `test-task` so you can test transitioning to the next experiment.
 
@@ -268,24 +269,24 @@ Remember if you need to shell inside, you can do `docker exec -it <containerid> 
  4. the experiment transitions cleanly to the next, or if it's the only experiment, the finished screen appears.
 
 
-## Add the Experiment
+### Add the Experiment
 When your experiment is ready to go, you should fork the [library repository](https://github.com/expfactory/experiments), and in the `experiments` folder, create a file named equivalently to the main identifier (`exp_id`) of your experiment in the folder `docs/_library`. For example, after I've cloned the fork of my repo, I might check out a new branch for my task:
 
 
-```
+```bash
 $ git checkout -b add/breath-counting-task
 Switched to a new branch 'add/breath-counting-task'
 ```
 
 and then I would create a new file:
 
-```
+```bash
 touch docs/_library/breath-counting-task.md
 ```
 
 and it's contents would be:
 
-```
+```markdown
 ---
 layout: experiment
 name:  "test-task"
@@ -306,7 +307,7 @@ The layout should remain `experiment` (this just determines how to render the pa
 
 The content on the bottom can be anything that you want to say about the experiment. You can include links, background, or even custom content like video. This input will render markdown into HTML, and also accepts HTML, so feel free to add what you need to describe your experiment. An example of the rendered page above can be [seen here](https://expfactory.github.io/experiments/e/test-task/). When you are done, add the newly created file with a commit to your local repository:
 
-```
+```bash
 git add docs/_library/breath-counting-task.md
 git commit -m "adding the breath counting task to library"
  1 file changed, 14 insertions(+)
@@ -315,7 +316,7 @@ git commit -m "adding the breath counting task to library"
 
 and then push!
 
-```
+```bash
 git push origin add/breath-counting-task
 ```
 
@@ -327,10 +328,10 @@ You should then be able to go to the [expfactory library](https://github.com/exp
 
 
 
-# Deploying Experiments
+## Deploying Experiments
 Once you get here, you've probably had your experiment pull request approved and merged! After this, your experiment will be made available in the [library](https://expfactory.github.io/experiments/library.json). More information will be added about using the library as it is developed. You can then add your experiment to a Reproducible Experiments Container, along with any of the other selection in the library. Read about [usage](/usage) for your different options if you haven't yet.
 
-# Contribute a Survey
+## Contribute a Survey
 A survey is (for now) just an experiment that is primarily questions. You can take a look at some our examples in the experiments library, or if you want to easily generate a new survey, see our [survey generator integration](/integrations.html#contribute-a-survey).
 
 
