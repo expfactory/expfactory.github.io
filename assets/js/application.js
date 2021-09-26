@@ -2766,6 +2766,7 @@ excluded_in_search: true
                         c = a[2];
                     console.log("Username: " + s);
                     console.log("Repository: " + c);
+                    c = "expfactory";
                     o.base_ = "https://api.github.com/users/" + s + "/repos", o.name_ = c
                 }
                 return o
