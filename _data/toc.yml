@@ -11,6 +11,8 @@
       url: "customize"
     - title: HTTPS container
       url: "generate-https"
+    - title: Experiment Library
+      url: "library"
 - title: "User Guide"
   url: "usage"
   children:
