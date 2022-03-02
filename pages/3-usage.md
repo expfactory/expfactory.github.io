@@ -27,9 +27,11 @@ below to undestand this.
 
 
 ## Start the Container
+
 The first thing you should do is start the container. The variables listed above can be set when you do this. 
 
 ### Save Data to the Host
+
 It's most likely the case that your container's default is to save data to the file system, and use a study id of expfactory. This coincides to running with no extra arguments, but perhaps mapping the data folder:
 
 ```bash
@@ -39,6 +41,7 @@ docker run -v /tmp/my-experiment/data/:/scif/data \
 ```
 
 ### Custom Databases
+
 Here is how you would specify a different studyid. The study id is only used for a folder name (in the case of a fileystem save) or an sqlite database name (for sqlite3 database):
 
 ```bash
@@ -56,6 +59,7 @@ docker run -v /tmp/my-experiment/data/:/scif/data \
 ```
 
 ### Custom Experiment Set
+
 Here is how to limit the experiments exposed in the portal. For example, you may have 30 installed in the container, but only want to reveal 3 for a session:
 
 ```bash
@@ -65,6 +69,7 @@ docker run -v /tmp/my-experiment/data/:/scif/data \
 ```
 
 ### Participant Variables
+
 When you start your container, you will have the option to provide a comma separated file (csv) of subject identifiers and experiment variables. These variables will simply be passed to the relevant experiments that are specified in the file given that a particular participant token is running. The variables are not rendered or otherwise checked in any way before being passed to the experiment (spaces and capitalization matters, and the experiment is required to do any extra parsing needed in the Javascript). The server does not do any kind of custom parsing or checks for them. Let's look at an example file to better understand this. The format of the file should be flat and tab delimited (default) with fields for an experiment id (`exp_id`), variable name and values (`var_name`, `var_values`) and then a token assigned to each:
 
 ```csv
@@ -194,14 +199,40 @@ A "token" is basically a subject id that is intended to be used once, and can be
 
 
 ```bash
-docker exec experiments expfactory users --help
-docker exec experiments expfactory users --new 3
+$ docker exec experiments expfactory users --help
+$ docker exec experiments expfactory users --new 3
 ```
 
 See [managing users](#managing-users) for complete details about generating, refreshing, and using tokens.
 
 
+### Custom tokens
+
+Often, you might want to provide expfactory with a custom set of user tokens. We suggest that you use this approach with caution,
+as if your subject identifiers are predictible (e.g., SUB01, SUB02... SUBN) then someone could maliciously increment them to take
+experiments that are not intended for them. However, if you want to provide a custom set of tokens to expfactory, you
+can prepare a file with tokens, a single token per line:
+
+```
+# this is a comment that will be ignored
+AAAAAAAA
+BBBBBBBB
+```
+
+And you'll want to place this file somewhere in the container that is bound to the host, or copy
+to your container with `docker cp`. Given that we have this file in the container at `/data`, we
+can then tell expfactory to custom generate the tokens:
+
+```bash
+$ docker exec experiments expfactory users --tokens /data/tokens.txt
+```
+
+Participant tokens that are already generated will be ignored, and new ones will
+be generated. This means you can update the file as needed and re-run the command
+without worrying about resetting data, or anything like that.
+
 ### Use tokens
+
 Once you generate tokens for your users (and remember that it's up to you to maintain the linking of anonymous tokens to actual participants) the tokens can be entered into the web interface:
 
 <div>
@@ -350,6 +381,7 @@ docker exec -it experiments bash
 ```
 
 ### List Users
+
 If you ever need to list the tokens you've generated, you can use the `users --list` command. Be careful that the environment variable `EXPFACTORY_DATABASE` is set to be the one that you intend. For example, a filesystem database setting will print all folders found in the mapped folder given this variable is set to `filesystem`. In the example below, we list users saved as folders on the filesystem:
 
 ```bash
