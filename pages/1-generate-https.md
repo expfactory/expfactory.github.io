@@ -192,7 +192,7 @@ Certbot automates certificate generation and renewal. In other words, it makes i
 ```bash
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get update
-sudo apt-get install python-certbot-nginx
+sudo apt-get install python3-certbot-nginx
 ```
 
 #### Step 3. Get certificates with certbot
