@@ -378,7 +378,7 @@ if the container stops and goes away, the data persists.
 docker run -d -p 80:80 -p 443:443 \
            -v /etc/ssl/certs:/etc/ssl/certs:ro \
            -v /etc/ssl/private:/etc/ssl/private:ro \
-           -v $PWD:/scif
+           -v $PWD:/scif/data \
            expfactory/experiments start
 ```
 
